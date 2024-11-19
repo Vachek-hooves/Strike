@@ -74,7 +74,7 @@ const StackCollectionDetailsScreen = ({route}) => {
       <ScrollView style={styles.itemsSection}>
         <Text style={styles.sectionTitle}>Items</Text>
         {collection.items.map(item => (
-          <CollectionItemCard key={item.id} item={item} />
+          <CollectionItemCard key={item.id} item={item} collectionId={collection.id} />
         ))}
       </ScrollView>
     );
@@ -112,8 +112,8 @@ const StackCollectionDetailsScreen = ({route}) => {
             <Text style={styles.deleteButtonText}>Delete collection</Text>
           </TouchableOpacity>
         </View>
-        {/* <View style={{height:80}}></View> */}
       </View>
+        {/* <View style={{height:80}}></View> */}
       <ReturnBtn style={{top: 50, right: 40}} />
     </StackLayout>
   );
@@ -148,10 +148,12 @@ const styles = StyleSheet.create({
     color: '#8E8E93',
     marginBottom: 20,
     lineHeight: 24,
+    maxHeight: 100,
   },
   buttonsContainer: {
     gap: 12,
     flexDirection: 'row',
+    marginTop: 10,
   },
   addButton: {
     backgroundColor: '#0A84FF',

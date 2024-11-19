@@ -6,8 +6,9 @@ const Context = createContext({
   addCollection: () => {},
   getCollectionsByCategory: () => {},
   getCollectionsGroupedByCategory: () => {},
-  deleteCollection: () => {},
   getCollectionById: () => {},
+  deleteCollection: () => {},
+  deleteItemFromCollection: () => {},
 });
 
 export const ContextProvider = ({children}) => {
@@ -120,6 +121,28 @@ export const ContextProvider = ({children}) => {
     return collections.find(collection => collection.id === id);
   };
 
+  const deleteItemFromCollection = async (collectionId, itemId) => {
+    try {
+      const updatedCollections = collections.map(collection => {
+        if (collection.id === collectionId) {
+          return {
+            ...collection,
+            items: collection.items.filter(item => item.id !== itemId)
+          };
+        }
+        return collection;
+      });
+
+      setCollections(updatedCollections);
+      await AsyncStorage.setItem('collections', JSON.stringify(updatedCollections));
+      return true;
+    } catch (error) {
+      console.error('Error deleting item:', error);
+      return false;
+    }
+  };
+
+
   const value = {
     collections,
     addCollection,
@@ -128,6 +151,7 @@ export const ContextProvider = ({children}) => {
     getCollectionsByCategory,
     getCollectionsGroupedByCategory,
     getCollectionById,
+    deleteItemFromCollection,
   };
 
   return <Context.Provider value={value}>{children}</Context.Provider>;

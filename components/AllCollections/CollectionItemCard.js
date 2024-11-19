@@ -1,10 +1,11 @@
 import {StyleSheet, Text, View, Image, TouchableOpacity} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
-const CollectionItemCard = ({item}) => {
+const CollectionItemCard = ({item,collectionId}) => {
+  // console.log(collectionId)
     const navigation = useNavigation();
     return (
-        <TouchableOpacity style={styles.itemCard} onPress={() => navigation.navigate('StackItemDetailsScreen', {item})}>
+        <TouchableOpacity style={styles.itemCard} onPress={() => navigation.navigate('StackItemDetailsScreen', {item,collectionId})}>
           {item.image && (
             <Image 
               source={{uri: item.image.uri}} 
