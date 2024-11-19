@@ -53,6 +53,7 @@ const StackCreateCollectionScreen = ({navigation}) => {
       setDescription('');
       // Show success message
       Alert.alert('Success', 'Collection created successfully!');
+      navigation.navigate('StackAllCollectionsScreen')
 
       // Navigate back or to another screen
       // navigation.goBack(); // If using React Navigation
