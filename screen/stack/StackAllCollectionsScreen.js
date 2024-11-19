@@ -1,14 +1,16 @@
-import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
+import {StyleSheet, Text, View, TouchableOpacity, Image} from 'react-native';
 import StackLayout from '../../components/layout/StackLayout';
 import ReturnBtn from '../../components/ui/ReturnBtn';
 import {useContextApp} from '../../store/context';
 import {useState} from 'react';
 import CategoryFIlter from '../../components/AllCollections/CategoryFIlter';
+import CollectionItem from '../../components/AllCollections/CollectionItem';
 
 const StackAllCollectionsScreen = () => {
   const {collections} = useContextApp();
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [isFilterOpen, setIsFilterOpen] = useState(false);
+  console.log(collections);
 
   // Get unique categories from collections
   const categories = [...new Set(collections.map(col => col.category))];
@@ -18,37 +20,15 @@ const StackAllCollectionsScreen = () => {
     ? collections.filter(col => col.category === selectedCategory)
     : collections;
 
-  // const renderFilterMenu = () => {
-  //   if (!isFilterOpen) return null;
-
-  //   return (
-  //     <View style={styles.filterMenu}>
-  //       {categories.map(category => (
-  //         <TouchableOpacity
-  //           key={category}
-  //           style={[
-  //             styles.filterItem,
-  //             selectedCategory === category && styles.selectedFilter,
-  //           ]}
-  //           onPress={() => {
-  //             setSelectedCategory(category);
-  //             setIsFilterOpen(false);
-  //           }}>
-  //           <Text style={styles.filterItemText}>{category}</Text>
-  //         </TouchableOpacity>
-  //       ))}
-  //     </View>
-  //   );
-  // };
+  
+  console.log(collections[0].image)
 
   const renderCollections = () => {
     if (collections.length === 0) {
       return <Text style={styles.noCollectionsText}>No collections found</Text>;
     }
     return filteredCollections.map(collection => (
-      <Text style={styles.collectionText} key={collection.id}>
-        {collection.name} ({collection.category})
-      </Text>
+      <CollectionItem key={collection.id} collection={collection} />
     ));
   };
 
@@ -136,5 +116,9 @@ const styles = StyleSheet.create({
     color: '#FFFFFF',
     textAlign: 'center',
     marginBottom: 10,
+  },
+  collectionImage: {
+    width: 100,
+    height: 100,
   },
 });
