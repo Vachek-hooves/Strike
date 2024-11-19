@@ -1,11 +1,15 @@
 import {StyleSheet, Text, View, Image, TouchableOpacity} from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
 const CollectionItem = ({collection}) => {
+    const navigation = useNavigation();
 
-    console.log('Collection image URI:', collection.image.uri);
+    const handleCollectionPress = () => {
+        navigation.navigate('StackCollectionDetailsScreen', {collection});
+    }
 
   return (
-    <TouchableOpacity style={styles.container}>
+    <TouchableOpacity style={styles.container} onPress={handleCollectionPress}>
       {collection.image && (
         <Image 
           source={{uri: collection.image.uri}} 

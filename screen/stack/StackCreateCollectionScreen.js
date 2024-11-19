@@ -24,9 +24,10 @@ const StackCreateCollectionScreen = ({navigation}) => {
   const [selectedCategory, setSelectedCategory] = useState('');
   const [imageCategory, setImageCategory  ] = useState(null);
   const [customCategory, setCustomCategory] = useState('');
+  const [description, setDescription] = useState('');
 
   const handleCategorySelect = category => {
-    console.log('category', category);
+    // console.log('category', category);
     setSelectedCategory(category);
     if (category !== 'Other') {
       setCustomCategory('');
@@ -40,7 +41,7 @@ const StackCreateCollectionScreen = ({navigation}) => {
 
   const handleCreate = async () => {
     const finalCategory = selectedCategory === 'Other' ? customCategory : selectedCategory;
-    const success = await addCollection(collectionName, finalCategory, imageCategory);
+    const success = await addCollection(collectionName, finalCategory, imageCategory, description);
     
 
     if (success) {
@@ -49,7 +50,7 @@ const StackCreateCollectionScreen = ({navigation}) => {
       setSelectedCategory('');
       setImageCategory(null);
       setCustomCategory('');
-
+      setDescription('');
       // Show success message
       Alert.alert('Success', 'Collection created successfully!');
 
@@ -77,6 +78,21 @@ const StackCreateCollectionScreen = ({navigation}) => {
         value={collectionName}
         onChangeText={setCollectionName}
         placeholderTextColor="#666"
+      />
+
+      {/* Description Input */}
+      <TextInput
+        style={styles.input}
+        placeholder="Description"
+        value={description}
+        onChangeText={setDescription}
+        placeholderTextColor="#666"
+        multiline={true}
+        numberOfLines={3}
+        textAlignVertical='top'
+        height={100}
+        lineHeight={20}
+        paddingTop={10}
       />
 
       {/* Dropdown Header */}

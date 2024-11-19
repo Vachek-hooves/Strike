@@ -1,17 +1,16 @@
 import {createContext, useContext, useState, useEffect} from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-
 const Context = createContext({
   collections: [],
   addCollection: () => {},
   getCollectionsByCategory: () => {},
   getCollectionsGroupedByCategory: () => {},
+  deleteCollection: () => {},
 });
 
 export const ContextProvider = ({children}) => {
   const [collections, setCollections] = useState([]);
-  console.log('collections', collections);
 
   // Load collections from AsyncStorage when app starts
   useEffect(() => {
@@ -31,20 +30,24 @@ export const ContextProvider = ({children}) => {
   };
 
   // Save new collection
-  const addCollection = async (name, category, image) => {
+  const addCollection = async (name, category, image,description) => {
     try {
       const newCollection = {
         id: Date.now().toString(), // Simple unique ID
         name,
         category,
         image,
-            createdAt: new Date().toISOString(),
-        items: [] // For future items in this collection
+        description,
+        createdAt: new Date().toISOString(),
+        items: [], // For future items in this collection
       };
 
-      const updatedCollections = [...collections, newCollection];
+      const updatedCollections = [newCollection,...collections];
       setCollections(updatedCollections);
-      await AsyncStorage.setItem('collections', JSON.stringify(updatedCollections));
+      await AsyncStorage.setItem(
+        'collections',
+        JSON.stringify(updatedCollections),
+      );
       return true;
     } catch (error) {
       console.error('Error adding collection:', error);
@@ -53,7 +56,7 @@ export const ContextProvider = ({children}) => {
   };
 
   // Get collections by category
-  const getCollectionsByCategory = (category) => {
+  const getCollectionsByCategory = category => {
     return collections.filter(collection => collection.category === category);
   };
 
@@ -68,9 +71,53 @@ export const ContextProvider = ({children}) => {
     }, {});
   };
 
+  const deleteCollection = async (id) => {
+    try {
+      const updatedCollections = collections.filter(
+        collection => collection.id !== id
+      );
+      setCollections(updatedCollections);
+      await AsyncStorage.setItem('collections', JSON.stringify(updatedCollections));
+      return true;
+    } catch (error) {
+      console.error('Error deleting collection:', error);
+      return false;
+    }
+  };
+
+  // Add item to collection
+  const addItemToCollection = async (collectionId, itemData) => {
+    try {
+      const updatedCollections = collections.map(collection => {
+        if (collection.id === collectionId) {
+          return {
+            ...collection,
+            items: [
+              {
+                id: Date.now().toString(),
+                ...itemData
+              },
+              ...collection.items
+            ]
+          };
+        }
+        return collection;
+      });
+
+      setCollections(updatedCollections);
+      await AsyncStorage.setItem('collections', JSON.stringify(updatedCollections));
+      return true;
+    } catch (error) {
+      console.error('Error adding item to collection:', error);
+      return false;
+    }
+  };
+
   const value = {
     collections,
     addCollection,
+    deleteCollection,
+    addItemToCollection,
     getCollectionsByCategory,
     getCollectionsGroupedByCategory,
   };

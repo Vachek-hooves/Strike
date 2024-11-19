@@ -10,7 +10,7 @@ const StackAllCollectionsScreen = () => {
   const {collections} = useContextApp();
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [isFilterOpen, setIsFilterOpen] = useState(false);
-  console.log(collections);
+  // console.log(collections);
 
   // Get unique categories from collections
   const categories = [...new Set(collections.map(col => col.category))];
@@ -20,8 +20,6 @@ const StackAllCollectionsScreen = () => {
     ? collections.filter(col => col.category === selectedCategory)
     : collections;
 
-  
-  console.log(collections[0].image)
 
   const renderCollections = () => {
     if (collections.length === 0) {

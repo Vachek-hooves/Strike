@@ -3,24 +3,40 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
 import {ContextProvider} from './store/context';
 import TabContainer from './TabNavigation/TabContainer';
-import {StackAllCollectionsScreen, StackCreateCollectionScreen} from './screen/stack';
+import {
+  StackAllCollectionsScreen,
+  StackCreateCollectionScreen,
+  StackCollectionDetailsScreen,
+} from './screen/stack';
+import StackCreateCollectionItemScreen from './screen/stack/StackCreateCollectionItemScreen';
 const Stack = createNativeStackNavigator();
 
 function App() {
-
-
   return (
     <ContextProvider>
-      <NavigationContainer >
-        <Stack.Navigator screenOptions={{headerShown:false}}>
+      <NavigationContainer>
+        <Stack.Navigator screenOptions={{headerShown: false}}>
           <Stack.Screen name="Tab" component={TabContainer} />
-          <Stack.Screen name="StackAllCollectionsScreen" component={StackAllCollectionsScreen} />
-          <Stack.Screen name="StackCreateCollectionScreen" component={StackCreateCollectionScreen} />
+          <Stack.Screen
+            name="StackAllCollectionsScreen"
+            component={StackAllCollectionsScreen}
+          />
+          <Stack.Screen
+            name="StackCreateCollectionScreen"
+            component={StackCreateCollectionScreen}
+          />
+          <Stack.Screen
+            name="StackCollectionDetailsScreen"
+            component={StackCollectionDetailsScreen}
+          />
+          <Stack.Screen
+            name="StackCreateCollectionItemScreen"
+            component={StackCreateCollectionItemScreen}
+          />
         </Stack.Navigator>
       </NavigationContainer>
     </ContextProvider>
   );
 }
-
 
 export default App;
