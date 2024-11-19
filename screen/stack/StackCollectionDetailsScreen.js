@@ -110,9 +110,9 @@ const StackCollectionDetailsScreen = ({ route }) => {
             <Text style={styles.deleteButtonText}>Delete collection</Text>
           </TouchableOpacity>
         </View>
-        <View style={{height:80}}></View>
+        {/* <View style={{height:80}}></View> */}
       </View>
-      <ReturnBtn />
+      {/* <ReturnBtn /> */}
     </StackLayout>
   );
 };
@@ -149,6 +149,7 @@ const styles = StyleSheet.create({
   },
   buttonsContainer: {
     gap: 12,
+    flexDirection:'row',
    
   },
   addButton: {
@@ -156,6 +157,7 @@ const styles = StyleSheet.create({
     padding: 16,
     borderRadius: 8,
     alignItems: 'center',
+    flex:1
   },
   addButtonText: {
     color: '#FFFFFF',
@@ -167,6 +169,7 @@ const styles = StyleSheet.create({
     padding: 16,
     borderRadius: 8,
     alignItems: 'center',
+    flex:1
   },
   deleteButtonText: {
     color: '#FFFFFF',
