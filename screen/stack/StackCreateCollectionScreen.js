@@ -121,6 +121,7 @@ const StackCreateCollectionScreen = ({navigation}) => {
           placeholderTextColor="#666"
         />
       )}
+      
 
       {/* Create Button - only shown when form is valid */}
       {isValid && (
@@ -128,7 +129,8 @@ const StackCreateCollectionScreen = ({navigation}) => {
           <Text style={styles.createButtonText}>Create</Text>
         </TouchableOpacity>
       )}
-      <ReturnBtn style={{bottom:50,right:50}}/>
+      <ReturnBtn style={{bottom:50,right:50,marginTop:20}}/>
+      
     </StackLayout>
   );
 };

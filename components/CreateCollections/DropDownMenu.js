@@ -4,6 +4,7 @@ import {
   View,
   TouchableOpacity,
   TextInput,
+  ScrollView,
 } from 'react-native';
 import {COLLECTION_CATEGORIES} from '../../data/categories';
 
@@ -15,7 +16,9 @@ const DropDownMenu = ({
   return (
     <>
       {isDropdownOpen && (
-        <View style={styles.dropdownMenu}>
+        <ScrollView
+          // style={styles.dropdownMenu}
+          contentContainerStyle={styles.dropdownMenu}>
           {COLLECTION_CATEGORIES.map(category => (
             <TouchableOpacity
               key={category}
@@ -27,8 +30,9 @@ const DropDownMenu = ({
               <Text style={styles.dropdownItemText}>{category}</Text>
             </TouchableOpacity>
           ))}
-        </View>
+        </ScrollView>
       )}
+      {/* <View style={{height:100}}></View> */}
     </>
   );
 };
@@ -40,6 +44,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#1C1C1E',
     borderRadius: 8,
     overflow: 'hidden',
+    height: '30%',
   },
   dropdownItem: {
     padding: 15,

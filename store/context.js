@@ -61,31 +61,41 @@ export const ContextProvider = ({children}) => {
   };
 
   // Save new collection
-  const addCollection = async (name, category, image,description) => {
+  const addCollection = async (name, category, image, description) => {
     try {
       const newCollection = {
-        id: Date.now().toString(), // Simple unique ID
+        id: Date.now().toString(),
         name,
         category,
         image,
         description,
         createdAt: new Date().toISOString(),
-        items: [], // For future items in this collection
+        items: [],
       };
 
-      const updatedCollections = [newCollection,...collections];
+      const updatedCollections = [newCollection, ...collections];
       setCollections(updatedCollections);
-      await AsyncStorage.setItem(
-        'collections',
-        JSON.stringify(updatedCollections),
-      );
+      await AsyncStorage.setItem('collections', JSON.stringify(updatedCollections));
 
-      // Add achievement for first collection
+      // Existing achievements
       if (collections.length === 0) {
         await updateAchievement('firstCollection', 25);
       }
-      
-      // Add base points for creating a collection
+
+      // New category-specific achievements
+      switch (category.toLowerCase()) {
+        case 'stamps':
+          await updateAchievement('fanOfStamps', 20);
+          break;
+        case 'custom':
+          await updateAchievement('customCollection', 25);
+          break;
+        case 'antiques':
+          await updateAchievement('antiques', 15);
+          break;
+      }
+
+      // Base points for creating a collection
       await updateScores(10);
       
       return true;
@@ -145,20 +155,29 @@ export const ContextProvider = ({children}) => {
         return collection;
       });
 
-    setCollections(updatedCollections);
+      setCollections(updatedCollections);
       await AsyncStorage.setItem('collections', JSON.stringify(updatedCollections));
 
       const collection = collections.find(c => c.id === collectionId);
       const newItemCount = collection.items.length + 1;
 
-      // Add achievement for first item
+      // Existing achievements
       if (newItemCount === 1) {
         await updateAchievement('firstItem', 30);
       }
-
-      // Check for 10 items achievement
       if (newItemCount === 10) {
         await updateAchievement('collector10Items', 50);
+      }
+
+      // New category-specific achievements
+      if (collection.category.toLowerCase() === 'stamps' && newItemCount % 5 === 0) {
+        // Award points for every 5 stamps
+        await updateAchievement('fanOfStamps', 20);
+      }
+
+      if (collection.category.toLowerCase() === 'books' && newItemCount % 6 === 0) {
+        // Award points for every 6 books
+        await updateAchievement('bookCollector', 25);
       }
 
       // Add base points for adding an item
