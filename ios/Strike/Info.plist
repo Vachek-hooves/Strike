@@ -63,6 +63,10 @@
 		<string>arm64</string>
 	</array>
 	<key>UISupportedInterfaceOrientations</key>
+	<key>NSCameraUsageDescription</key>
+	<string>App need access to camera to take photos of your profile image</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>App need access to photo library to add images for ui</string>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
 		<string>UIInterfaceOrientationLandscapeLeft</string>
