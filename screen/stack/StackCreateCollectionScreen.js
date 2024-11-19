@@ -23,10 +23,14 @@ const StackCreateCollectionScreen = ({navigation}) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState('');
   const [imageCategory, setImageCategory  ] = useState(null);
+  const [customCategory, setCustomCategory] = useState('');
 
   const handleCategorySelect = category => {
     console.log('category', category);
     setSelectedCategory(category);
+    if (category !== 'Other') {
+      setCustomCategory('');
+    }
     setIsDropdownOpen(false);
   };
 
@@ -35,14 +39,16 @@ const StackCreateCollectionScreen = ({navigation}) => {
   }
 
   const handleCreate = async () => {
-    // if (isFormValid(collectionName, selectedCategory)) {
-    const success = await addCollection(collectionName, selectedCategory, imageCategory);
+    const finalCategory = selectedCategory === 'Other' ? customCategory : selectedCategory;
+    const success = await addCollection(collectionName, finalCategory, imageCategory);
     
 
     if (success) {
       // Clear form
       setCollectionName('');
       setSelectedCategory('');
+      setImageCategory(null);
+      setCustomCategory('');
 
       // Show success message
       Alert.alert('Success', 'Collection created successfully!');
@@ -52,10 +58,12 @@ const StackCreateCollectionScreen = ({navigation}) => {
     } else {
       Alert.alert('Error', 'Failed to create collection. Please try again.');
     }
-    // }
   };
 
-  const isValid = isFormValid(collectionName, selectedCategory);
+  const isValid = isFormValid(
+    collectionName, 
+    selectedCategory === 'Other' ? customCategory : selectedCategory
+  );
 
   return (
     <StackLayout>
@@ -86,6 +94,17 @@ const StackCreateCollectionScreen = ({navigation}) => {
         setSelectedCategory={handleCategorySelect}
         isDropdownOpen={isDropdownOpen}
       />
+
+      {/* Custom Category Input - Only shown when "Other" is selected */}
+      {selectedCategory === 'Other' && (
+        <TextInput
+          style={[styles.input, styles.customCategoryInput]}
+          placeholder="Enter custom category"
+          value={customCategory}
+          onChangeText={setCustomCategory}
+          placeholderTextColor="#666"
+        />
+      )}
 
       {/* Create Button - only shown when form is valid */}
       {isValid && (
@@ -135,5 +154,10 @@ const styles = StyleSheet.create({
     color: '#FFFFFF',
     fontSize: 16,
     fontWeight: '600',
+  },
+  customCategoryInput: {
+    marginTop: 12,
+    borderWidth: 1,
+    borderColor: '#333',
   },
 });

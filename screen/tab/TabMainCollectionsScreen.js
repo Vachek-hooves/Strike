@@ -1,26 +1,30 @@
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native'
+import TabLayou from '../../components/layout/TabLayou'
 
 
 const TabMainCollectionsScreen = ({navigation}) => {
  
   return (
+    <TabLayou>
+
     <View style={styles.container}>
       <Text style={styles.title}>Collections</Text>
       
       <TouchableOpacity 
         style={styles.button}
-        onPress={() => navigation.navigate('AllCollections')}
-      >
+        onPress={() => navigation.navigate('StackAllCollectionsScreen')}
+        >
         <Text style={styles.buttonText}>All Collections</Text>
       </TouchableOpacity>
 
       <TouchableOpacity 
         style={[styles.button, styles.createButton]}
         onPress={() => navigation.navigate('StackCreateCollectionScreen')}
-      >
+        >
         <Text style={styles.buttonText}>Create Collection</Text>
       </TouchableOpacity>
     </View>
+        </TabLayou>
   )
 }
 

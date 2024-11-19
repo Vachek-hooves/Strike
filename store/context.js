@@ -1,7 +1,12 @@
 import {createContext, useContext, useState, useEffect} from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const Context = createContext();
+const Context = createContext({
+  collections: [],
+  addCollection: () => {},
+  getCollectionsByCategory: () => {},
+  getCollectionsGroupedByCategory: () => {},
+});
 
 export const ContextProvider = ({children}) => {
   const [collections, setCollections] = useState([]);
@@ -65,7 +70,6 @@ export const ContextProvider = ({children}) => {
   const value = {
     collections,
     addCollection,
-   
     getCollectionsByCategory,
     getCollectionsGroupedByCategory,
   };
