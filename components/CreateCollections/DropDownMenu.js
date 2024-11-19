@@ -13,27 +13,24 @@ const DropDownMenu = ({
   setSelectedCategory,
   isDropdownOpen,
 }) => {
+  if (!isDropdownOpen) return null;
+
   return (
-    <>
-      {isDropdownOpen && (
-        <ScrollView
-          // style={styles.dropdownMenu}
-          contentContainerStyle={styles.dropdownMenu}>
-          {COLLECTION_CATEGORIES.map(category => (
-            <TouchableOpacity
-              key={category}
-              style={[
-                styles.dropdownItem,
-                selectedCategory === category && styles.selectedItem,
-              ]}
-              onPress={() => setSelectedCategory(category)}>
-              <Text style={styles.dropdownItemText}>{category}</Text>
-            </TouchableOpacity>
-          ))}
-        </ScrollView>
-      )}
-      {/* <View style={{height:100}}></View> */}
-    </>
+    <View style={styles.dropdownContainer}>
+      <ScrollView style={styles.dropdownMenu}>
+        {COLLECTION_CATEGORIES.map(category => (
+          <TouchableOpacity
+            key={category}
+            style={[
+              styles.dropdownItem,
+              selectedCategory === category && styles.selectedItem,
+            ]}
+            onPress={() => setSelectedCategory(category)}>
+            <Text style={styles.dropdownItemText}>{category}</Text>
+          </TouchableOpacity>
+        ))}
+      </ScrollView>
+    </View>
   );
 };
 
