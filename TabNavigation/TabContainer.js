@@ -1,6 +1,6 @@
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {StyleSheet} from 'react-native';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import Icon from 'react-native-vector-icons/Ionicons';
 import {
   TabAchievScreen,
   TabMainCollectionsScreen,
@@ -46,7 +46,7 @@ const TabContainer = () => {
         component={TabUserScreen}
         options={{
           tabBarIcon: ({color, size}) => (
-            <Icon name="account" size={46} color={color} />
+            <Icon name="person" size={46} color={color} />
           ),
         }}
       />
