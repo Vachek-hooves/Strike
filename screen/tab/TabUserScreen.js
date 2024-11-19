@@ -1,7 +1,15 @@
-import { StyleSheet, Text, View, TextInput, TouchableOpacity, Alert } from 'react-native'
-import React, { useState, useEffect } from 'react'
-import TabLayou from '../../components/layout/TabLayou'
-import CustomImagePicker from '../../components/ui/ImagePicker'
+import {
+  StyleSheet,
+  Text,
+  View,
+  TextInput,
+  TouchableOpacity,
+  Alert,
+  ImageBackground,
+} from 'react-native';
+import React, {useState, useEffect, useRef} from 'react';
+import TabLayou from '../../components/layout/TabLayou';
+import CustomImagePicker from '../../components/ui/ImagePicker';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Icon from 'react-native-vector-icons/Ionicons';
 
@@ -18,7 +26,7 @@ const TabUserScreen = () => {
     try {
       const savedName = await AsyncStorage.getItem('userName');
       const savedImage = await AsyncStorage.getItem('userImage');
-      
+
       if (savedName) setUserName(savedName);
       if (savedImage) setUserImage(JSON.parse(savedImage));
     } catch (error) {
@@ -26,7 +34,7 @@ const TabUserScreen = () => {
     }
   };
 
-  const handleImageSelected = (image) => {
+  const handleImageSelected = image => {
     setUserImage(image);
   };
 
@@ -54,12 +62,21 @@ const TabUserScreen = () => {
     <TabLayou>
       <View style={styles.container}>
         <Text style={styles.title}>Profile</Text>
-        
+
         <View style={styles.profileContainer}>
-          <CustomImagePicker 
-            onImageSelected={handleImageSelected}
-            initialImage={userImage}
-          />
+          <View style={styles.imageContainer}>
+            <View style={styles.imageWrapper}>
+              <CustomImagePicker
+                onImageSelected={handleImageSelected}
+                initialImage={userImage}
+              />
+            </View>
+            {/* <ImageBackground
+              source={require('../../assets/profilebg/level31.png')}
+              style={styles.levelBackground}
+              resizeMode="contain"
+            /> */}
+          </View>
 
           {isEditing ? (
             <View style={styles.editContainer}>
@@ -71,29 +88,41 @@ const TabUserScreen = () => {
                   value={userName}
                   onChangeText={setUserName}
                 />
-                <Icon name="pencil" size={20} color="#666" style={styles.inputIcon} />
+                <Icon
+                  name="pencil"
+                  size={20}
+                  color="#666"
+                  style={styles.inputIcon}
+                />
               </View>
-              <TouchableOpacity 
-                style={styles.saveButton}
-                onPress={handleSave}
-              >
+              <TouchableOpacity style={styles.saveButton} onPress={handleSave}>
                 <Text style={styles.buttonText}>Save</Text>
               </TouchableOpacity>
             </View>
           ) : (
             <View style={styles.displayContainer}>
-              <TouchableOpacity 
+              <TouchableOpacity
                 style={styles.nameContainer}
-                onPress={() => setIsEditing(true)}
-              >
-                <Text style={styles.userName}>{userName || 'Add your name'}</Text>
-                <Icon name="pencil" size={20} color="#0A84FF" style={styles.editIcon} />
+                onPress={() => setIsEditing(true)}>
+                <Text style={styles.userName}>
+                  {userName || 'Add your name'}
+                </Text>
+                <Icon
+                  name="pencil"
+                  size={20}
+                  color="#0A84FF"
+                  style={styles.editIcon}
+                />
               </TouchableOpacity>
-              <TouchableOpacity 
+              <TouchableOpacity
                 style={styles.editButton}
-                onPress={() => setIsEditing(true)}
-              >
-                <Icon name="create-outline" size={20} color="#FFFFFF" style={styles.buttonIcon} />
+                onPress={() => setIsEditing(true)}>
+                <Icon
+                  name="create-outline"
+                  size={20}
+                  color="#FFFFFF"
+                  style={styles.buttonIcon}
+                />
                 <Text style={styles.buttonText}>Edit Profile</Text>
               </TouchableOpacity>
             </View>
@@ -101,10 +130,10 @@ const TabUserScreen = () => {
         </View>
       </View>
     </TabLayou>
-  )
-}
+  );
+};
 
-export default TabUserScreen
+export default TabUserScreen;
 
 const styles = StyleSheet.create({
   container: {
@@ -189,4 +218,46 @@ const styles = StyleSheet.create({
     width: '80%',
     alignItems: 'center',
   },
-})
+  imageContainer: {
+    width: 180,
+    height: 180,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginBottom: 20,
+    position: 'relative',
+  },
+  imageWrapper: {
+    width: 150,
+    height: 150,
+    position: 'relative',
+    zIndex: 1,
+  },
+  levelBackground: {
+    position: 'absolute',
+    width: '100%',
+    height: '100%',
+    zIndex: 2,
+    top: 0,
+    left: 0,
+  },
+  cameraButton: {
+    position: 'absolute',
+    right: 20,
+    bottom: 20,
+    backgroundColor: '#0A84FF',
+    width: 36,
+    height: 36,
+    borderRadius: 18,
+    justifyContent: 'center',
+    alignItems: 'center',
+    zIndex: 3,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
+  },
+});
