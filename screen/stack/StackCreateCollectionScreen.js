@@ -128,7 +128,7 @@ const StackCreateCollectionScreen = ({navigation}) => {
           <Text style={styles.createButtonText}>Create</Text>
         </TouchableOpacity>
       )}
-      <ReturnBtn />
+      <ReturnBtn style={{bottom:50,right:50}}/>
     </StackLayout>
   );
 };

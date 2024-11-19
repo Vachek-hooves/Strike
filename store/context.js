@@ -9,14 +9,21 @@ const Context = createContext({
   getCollectionById: () => {},
   deleteCollection: () => {},
   deleteItemFromCollection: () => {},
+  achievements: {},
+  scores: 0,
+  updateAchievements: () => {},
 });
 
 export const ContextProvider = ({children}) => {
   const [collections, setCollections] = useState([]);
+  const [achievements, setAchievements] = useState({});
+  const [scores, setScores] = useState(0);
 
   // Load collections from AsyncStorage when app starts
   useEffect(() => {
     loadCollections();
+    loadAchievements();
+    loadScores();
   }, []);
 
   // Load collections from storage
@@ -28,6 +35,28 @@ export const ContextProvider = ({children}) => {
       }
     } catch (error) {
       console.error('Error loading collections:', error);
+    }
+  };
+
+  const loadAchievements = async () => {
+    try {
+      const savedAchievements = await AsyncStorage.getItem('achievements');
+      if (savedAchievements) {
+        setAchievements(JSON.parse(savedAchievements));
+      }
+    } catch (error) {
+      console.error('Error loading achievements:', error);
+    }
+  };
+
+  const loadScores = async () => {
+    try {
+      const savedScores = await AsyncStorage.getItem('scores');
+      if (savedScores) {
+        setScores(parseInt(savedScores));
+      }
+    } catch (error) {
+      console.error('Error loading scores:', error);
     }
   };
 
@@ -50,6 +79,15 @@ export const ContextProvider = ({children}) => {
         'collections',
         JSON.stringify(updatedCollections),
       );
+
+      // Add achievement for first collection
+      if (collections.length === 0) {
+        await updateAchievement('firstCollection', 25);
+      }
+      
+      // Add base points for creating a collection
+      await updateScores(10);
+      
       return true;
     } catch (error) {
       console.error('Error adding collection:', error);
@@ -109,6 +147,23 @@ export const ContextProvider = ({children}) => {
 
     setCollections(updatedCollections);
       await AsyncStorage.setItem('collections', JSON.stringify(updatedCollections));
+
+      const collection = collections.find(c => c.id === collectionId);
+      const newItemCount = collection.items.length + 1;
+
+      // Add achievement for first item
+      if (newItemCount === 1) {
+        await updateAchievement('firstItem', 30);
+      }
+
+      // Check for 10 items achievement
+      if (newItemCount === 10) {
+        await updateAchievement('collector10Items', 50);
+      }
+
+      // Add base points for adding an item
+      await updateScores(10);
+
       return true;
     } catch (error) {
       console.error('Error adding item to collection:', error);
@@ -142,6 +197,29 @@ export const ContextProvider = ({children}) => {
     }
   };
 
+  const updateAchievement = async (achievementId, points) => {
+    try {
+      const newAchievements = {
+        ...achievements,
+        [achievementId]: true,
+      };
+      setAchievements(newAchievements);
+      await AsyncStorage.setItem('achievements', JSON.stringify(newAchievements));
+      await updateScores(points);
+    } catch (error) {
+      console.error('Error updating achievement:', error);
+    }
+  };
+
+  const updateScores = async (points) => {
+    try {
+      const newScores = scores + points;
+      setScores(newScores);
+      await AsyncStorage.setItem('scores', newScores.toString());
+    } catch (error) {
+      console.error('Error updating scores:', error);
+    }
+  };
 
   const value = {
     collections,
@@ -152,6 +230,8 @@ export const ContextProvider = ({children}) => {
     getCollectionsGroupedByCategory,
     getCollectionById,
     deleteItemFromCollection,
+    achievements,
+    scores,
   };
 
   return <Context.Provider value={value}>{children}</Context.Provider>;

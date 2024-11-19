@@ -13,7 +13,7 @@ const TabContainer = () => {
         name="TabMainCollectionsScreen"
         component={TabMainCollectionsScreen}
       />
-      <Tab.Screen name="TabCreateCollection" component={TabCreateCollection} />
+      {/* <Tab.Screen name="TabCreateCollection" component={TabCreateCollection} /> */}
       <Tab.Screen name="TabAchievScreen" component={TabAchievScreen} />
     </Tab.Navigator>
   );
