@@ -1,8 +1,8 @@
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {
   TabAchievScreen,
-  TabCreateCollection,
   TabMainCollectionsScreen,
+  TabUserScreen,
 } from '../screen/tab';
 const Tab = createBottomTabNavigator();
 
@@ -13,8 +13,8 @@ const TabContainer = () => {
         name="TabMainCollectionsScreen"
         component={TabMainCollectionsScreen}
       />
-      {/* <Tab.Screen name="TabCreateCollection" component={TabCreateCollection} /> */}
       <Tab.Screen name="TabAchievScreen" component={TabAchievScreen} />
+      <Tab.Screen name="TabUserScreen" component={TabUserScreen} />
     </Tab.Navigator>
   );
 };
