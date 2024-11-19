@@ -1,4 +1,4 @@
-import {StyleSheet, Text, View, TouchableOpacity, Image} from 'react-native';
+import {StyleSheet, Text, View, ScrollView} from 'react-native';
 import StackLayout from '../../components/layout/StackLayout';
 import ReturnBtn from '../../components/ui/ReturnBtn';
 import {useContextApp} from '../../store/context';
@@ -46,7 +46,9 @@ const StackAllCollectionsScreen = () => {
         isFilterOpen={isFilterOpen}
         setIsFilterOpen={setIsFilterOpen}
       />
-      {renderCollections()}
+      <ScrollView>
+        {renderCollections()}
+      </ScrollView>
       <ReturnBtn />
     </StackLayout>
   );

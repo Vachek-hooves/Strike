@@ -1,10 +1,11 @@
-import {StyleSheet, Text, View, Image} from 'react-native';
+import {StyleSheet, Text, View, Image, TouchableOpacity} from 'react-native';
 
 const CollectionItem = ({collection}) => {
 
+    console.log('Collection image URI:', collection.image.uri);
 
   return (
-    <View style={styles.container}>
+    <TouchableOpacity style={styles.container}>
       {collection.image && (
         <Image 
           source={{uri: collection.image.uri}} 
@@ -16,7 +17,7 @@ const CollectionItem = ({collection}) => {
         <Text style={styles.name}>{collection.name}</Text>
         <Text style={styles.category}>{collection.category}</Text>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 }
 
