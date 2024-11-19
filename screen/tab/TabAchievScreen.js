@@ -1,60 +1,61 @@
-import { StyleSheet, Text, View, ScrollView, TouchableOpacity } from 'react-native'
+import { StyleSheet, Text, View, ScrollView, TouchableOpacity ,Image} from 'react-native'
 import TabLayou from '../../components/layout/TabLayou'
 import { useContextApp } from '../../store/context'
 import Icon from 'react-native-vector-icons/FontAwesome5'
+import { ACHIEVEMENTS } from '../../data/achievements'
 
-const ACHIEVEMENTS = [
-  {
-    id: 'firstCollection',
-    title: 'First collection',
-    description: 'Create your first collection',
-    points: 25,
-    icon: '🏆',
-  },
-  {
-    id: 'firstItem',
-    title: 'First item',
-    description: 'Create your first item',
-    points: 30,
-    icon: '🏆',
-  },
-  {
-    id: 'collector10Items',
-    title: 'Collector of 10 items',
-    description: 'Have 10 items in a single collection',
-    points: 50,
-    icon: '🏆',
-  },
-  {
-    id: 'fanOfStamps',
-    title: 'Fan of Stamps',
-    description: 'Add 5 items to your stamp collection',
-    points: 20,
-    icon: '📫',
-  },
-  {
-    id: 'customCollection',
-    title: 'Custom Collection',
-    description: 'Create a custom collection',
-    points: 25,
-    icon: '🎨',
-  },
-  {
-    id: 'antiques',
-    title: 'Antiques Enthusiast',
-    description: 'Create an antiques collection',
-    points: 15,
-    icon: '🏺',
-  },
-  {
-    id: 'bookCollector',
-    title: 'Book Worm',
-    description: 'Add 6 items to your book collection',
-    points: 25,
-    icon: '📚',
-  },
-  // Add more achievements as needed
-]
+// const ACHIEVEMENTS = [
+//   {
+//     id: 'firstCollection',
+//     title: 'First collection',
+//     description: 'Create your first collection',
+//     points: 25,
+//     icon: '🏆',
+//   },
+//   {
+//     id: 'firstItem',
+//     title: 'First item',
+//     description: 'Create your first item',
+//     points: 30,
+//     icon: '🏆',
+//   },
+//   {
+//     id: 'collector10Items',
+//     title: 'Collector of 10 items',
+//     description: 'Have 10 items in a single collection',
+//     points: 50,
+//     icon: '🏆',
+//   },
+//   {
+//     id: 'fanOfStamps',
+//     title: 'Fan of Stamps',
+//     description: 'Add 5 items to your stamp collection',
+//     points: 20,
+//     icon: '📫',
+//   },
+//   {
+//     id: 'customCollection',
+//     title: 'Custom Collection',
+//     description: 'Create a custom collection',
+//     points: 25,
+//     icon: '🎨',
+//   },
+//   {
+//     id: 'antiques',
+//     title: 'Antiques Enthusiast',
+//     description: 'Create an antiques collection',
+//     points: 15,
+//     icon: '🏺',
+//   },
+//   {
+//     id: 'bookCollector',
+//     title: 'Book Worm',
+//     description: 'Add 6 items to your book collection',
+//     points: 25,
+//     icon: '📚',
+//   },
+//   // Add more achievements as needed
+// ]
 
 const TabAchievScreen = () => {
   const { achievements, scores } = useContextApp()
@@ -86,6 +87,7 @@ const TabAchievScreen = () => {
               !achievements[achievement.id] && styles.achievementLocked
             ]}
           >
+              {/* <Image source={require('../../assets/ui/awardFrame.png')} style={styles.awardFrame}/> */}
             <View style={styles.achievementIcon}>
               <Text style={styles.iconText}>{achievement.icon}</Text>
             </View>
@@ -115,6 +117,10 @@ const TabAchievScreen = () => {
 export default TabAchievScreen
 
 const styles = StyleSheet.create({
+  awardFrame: {
+    width: '10%',
+    height: '100%',
+  },
   container: {
     flex: 1,
     backgroundColor: '#000',
@@ -161,16 +167,16 @@ const styles = StyleSheet.create({
     opacity: 0.5,
   },
   achievementIcon: {
-    width: 40,
-    height: 40,
-    borderRadius: 20,
+    width: 90,
+    height: 90,
+    borderRadius: 45,
     backgroundColor: '#2196f3',
     justifyContent: 'center',
     alignItems: 'center',
     marginRight: 12,
   },
   iconText: {
-    fontSize: 20,
+    fontSize: 42,
   },
   achievementInfo: {
     flex: 1,
