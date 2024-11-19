@@ -12,7 +12,7 @@ import {isFormValid} from '../../utils/validations';
 import {useContextApp} from '../../store/context';
 import StackLayout from '../../components/layout/StackLayout';
 import DropDownMenu from '../../components/CreateCollections/DropDownMenu';
-
+import ReturnBtn from '../../components/ui/ReturnBtn';
 const StackCreateCollectionScreen = ({navigation}) => {
   const {addCollection} = useContextApp();
   const [collectionName, setCollectionName] = useState('');
@@ -82,6 +82,7 @@ const StackCreateCollectionScreen = ({navigation}) => {
           <Text style={styles.createButtonText}>Create</Text>
         </TouchableOpacity>
       )}
+      <ReturnBtn />
     </StackLayout>
   );
 };

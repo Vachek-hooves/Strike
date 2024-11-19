@@ -1,16 +1,19 @@
 import { StyleSheet,View, SafeAreaView } from 'react-native'
 
-const StackLayout = ({children}) => {
+
+const TabLayou = ({children}) => {
   return (
     <View style={styles.container}>
       <SafeAreaView style={styles.safeArea}>
         {children}
       </SafeAreaView>
     </View>
+     
+  
   )
 }
 
-export default StackLayout
+export default TabLayou
 
 const styles = StyleSheet.create({
   container: {

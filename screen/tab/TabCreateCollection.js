@@ -3,15 +3,8 @@ import { isFormValid } from '../../utils/validations';
 import { useState } from 'react';
 import { useContextApp } from '../../store/context';
 import { COLLECTION_CATEGORIES } from '../../data/categories';
-// const COLLECTION_CATEGORIES = [
-//   'Coins',
-//   'Stamps',
-//   'Toys',
-//   'Antiques',
-//   'Books',
-//   'Cards',
-//   'Other'
-// ];
+import TabLayou from '../../components/layout/TabLayou';
+
 
 const TabCreateCollection = () => {
   const { addCollection } = useContextApp();
@@ -47,7 +40,8 @@ const TabCreateCollection = () => {
   const isValid = isFormValid(collectionName, selectedCategory);
 
   return (
-    <View style={styles.container}>
+    <TabLayou>  
+    {/* <View style={styles.container}> */}
       <Text style={styles.title}>Create collection</Text>
       
       {/* Collection Name Input */}
@@ -96,7 +90,8 @@ const TabCreateCollection = () => {
           <Text style={styles.createButtonText}>Create</Text>
         </TouchableOpacity>
       )}
-    </View>
+    {/* </View> */}
+    </TabLayou>
   );
 };
 
