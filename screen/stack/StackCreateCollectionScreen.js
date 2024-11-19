@@ -13,20 +13,30 @@ import {useContextApp} from '../../store/context';
 import StackLayout from '../../components/layout/StackLayout';
 import DropDownMenu from '../../components/CreateCollections/DropDownMenu';
 import ReturnBtn from '../../components/ui/ReturnBtn';
+import CustomImagePicker from '../../components/ui/ImagePicker';
+
+
+
 const StackCreateCollectionScreen = ({navigation}) => {
   const {addCollection} = useContextApp();
   const [collectionName, setCollectionName] = useState('');
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState('');
+  const [imageCategory, setImageCategory  ] = useState(null);
 
   const handleCategorySelect = category => {
     console.log('category', category);
     setSelectedCategory(category);
     setIsDropdownOpen(false);
   };
+
+  const handleImageCategorySelected = image => {
+    setImageCategory(image);
+  }
+
   const handleCreate = async () => {
     // if (isFormValid(collectionName, selectedCategory)) {
-    const success = await addCollection(collectionName, selectedCategory);
+    const success = await addCollection(collectionName, selectedCategory, imageCategory);
     
 
     if (success) {
@@ -50,6 +60,7 @@ const StackCreateCollectionScreen = ({navigation}) => {
   return (
     <StackLayout>
       <Text style={styles.title}>Create collection</Text>
+      <CustomImagePicker onImageSelected={handleImageCategorySelected} />
 
       {/* Collection Name Input */}
       <TextInput

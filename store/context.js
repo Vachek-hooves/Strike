@@ -25,13 +25,14 @@ export const ContextProvider = ({children}) => {
   };
 
   // Save new collection
-  const addCollection = async (name, category) => {
+  const addCollection = async (name, category, image) => {
     try {
       const newCollection = {
         id: Date.now().toString(), // Simple unique ID
         name,
         category,
-        createdAt: new Date().toISOString(),
+        image,
+            createdAt: new Date().toISOString(),
         items: [] // For future items in this collection
       };
 
