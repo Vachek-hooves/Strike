@@ -23,6 +23,15 @@ const TabContainer = () => {
         tabBarIconStyle: styles.tabBarIcon,
       }}
     >
+      <Tab.Screen 
+        name="Profile"
+        component={TabUserScreen}
+        options={{
+          tabBarIcon: ({color, size}) => (
+            <Icon name="person" size={46} color={color} />
+          ),
+        }}
+      />
       <Tab.Screen
         name="Collection"
         component={TabMainCollectionsScreen}
@@ -38,15 +47,6 @@ const TabContainer = () => {
         options={{
           tabBarIcon: ({color, size}) => (
             <Icon name="trophy" size={46} color={color} />
-          ),
-        }}
-      />
-      <Tab.Screen 
-        name="Profile"
-        component={TabUserScreen}
-        options={{
-          tabBarIcon: ({color, size}) => (
-            <Icon name="person" size={46} color={color} />
           ),
         }}
       />
