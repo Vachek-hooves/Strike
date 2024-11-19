@@ -7,6 +7,7 @@ const Context = createContext({
   getCollectionsByCategory: () => {},
   getCollectionsGroupedByCategory: () => {},
   deleteCollection: () => {},
+  getCollectionById: () => {},
 });
 
 export const ContextProvider = ({children}) => {
@@ -90,7 +91,7 @@ export const ContextProvider = ({children}) => {
     try {
       const updatedCollections = collections.map(collection => {
         if (collection.id === collectionId) {
-          return {
+          const updatedCollection = {
             ...collection,
             items: [
               {
@@ -100,17 +101,23 @@ export const ContextProvider = ({children}) => {
               ...collection.items
             ]
           };
+          return updatedCollection;
         }
         return collection;
       });
 
-      setCollections(updatedCollections);
+    setCollections(updatedCollections);
       await AsyncStorage.setItem('collections', JSON.stringify(updatedCollections));
       return true;
     } catch (error) {
       console.error('Error adding item to collection:', error);
       return false;
     }
+  };
+
+  // Add getCollectionById function
+  const getCollectionById = (id) => {
+    return collections.find(collection => collection.id === id);
   };
 
   const value = {
@@ -120,6 +127,7 @@ export const ContextProvider = ({children}) => {
     addItemToCollection,
     getCollectionsByCategory,
     getCollectionsGroupedByCategory,
+    getCollectionById,
   };
 
   return <Context.Provider value={value}>{children}</Context.Provider>;

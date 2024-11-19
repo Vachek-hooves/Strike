@@ -1,13 +1,26 @@
+import { useEffect, useState } from 'react';
 import { StyleSheet, Text, View, Image, TouchableOpacity, Alert ,ScrollView} from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useIsFocused } from '@react-navigation/native';
 import StackLayout from '../../components/layout/StackLayout';
 import ReturnBtn from '../../components/ui/ReturnBtn';
 import { useContextApp } from '../../store/context';
 
 const StackCollectionDetailsScreen = ({ route }) => {
-  const { collection } = route.params;
+  const { collection: initialCollection } = route.params;
+  const [collection, setCollection] = useState(initialCollection);
   const navigation = useNavigation();
-  const { deleteCollection } = useContextApp();
+  const { deleteCollection, getCollectionById } = useContextApp();
+  const isFocused = useIsFocused();
+
+  // Refresh collection data when screen is focused
+  useEffect(() => {
+    if (isFocused) {
+      const updatedCollection = getCollectionById(collection.id);
+      if (updatedCollection) {
+        setCollection(updatedCollection);
+      }
+    }
+  }, [isFocused, collection.id]);
 
   const handleDeleteCollection = () => {
     Alert.alert(

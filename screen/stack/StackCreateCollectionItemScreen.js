@@ -34,6 +34,11 @@ const StackCreateCollectionItemScreen = ({route,navigation}) => {
     });
 
     if (success) {
+      setTitle('');
+      setCost('');
+      setDescription('');
+      setItemImage(null);
+      
       navigation.goBack();
     } else {
       Alert.alert('Error', 'Failed to add item');
