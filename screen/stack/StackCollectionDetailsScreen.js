@@ -4,6 +4,7 @@ import { useNavigation, useIsFocused } from '@react-navigation/native';
 import StackLayout from '../../components/layout/StackLayout';
 import ReturnBtn from '../../components/ui/ReturnBtn';
 import { useContextApp } from '../../store/context';
+import CollectionItemCard from '../../components/AllCollections/CollectionItemCard';
 
 const StackCollectionDetailsScreen = ({ route }) => {
   const { collection: initialCollection } = route.params;
@@ -56,11 +57,20 @@ const StackCollectionDetailsScreen = ({ route }) => {
 
   console.log(collection.items.map(item=>item.title));
 
-  const renderItems = (items) => {
-    return items.map(item=>{
-      return <Text style={styles.itemTitle} key={item.id}>{item.title}as</Text>
-    })
-  }
+  const renderItems = () => {
+    if (collection.items.length === 0) {
+      return null;
+    }
+
+    return (
+      <ScrollView  style={styles.itemsSection}>
+        <Text style={styles.sectionTitle}>Items</Text>
+        {collection.items.map(item => (
+          <CollectionItemCard key={item.id} item={item} />
+        ))}
+      </ScrollView>
+    );
+  };
 
   return (
     <StackLayout>
@@ -81,11 +91,8 @@ const StackCollectionDetailsScreen = ({ route }) => {
           <Text style={styles.description}>{collection.description}</Text>
         )}
 
-        {collection.items.length > 0 && (
-          <ScrollView>
-            {renderItems(collection.items)}
-          </ScrollView>
-        )}
+        
+      {  renderItems()}
 
 
         <View style={styles.buttonsContainer}>
@@ -103,6 +110,7 @@ const StackCollectionDetailsScreen = ({ route }) => {
             <Text style={styles.deleteButtonText}>Delete collection</Text>
           </TouchableOpacity>
         </View>
+        <View style={{height:80}}></View>
       </View>
       <ReturnBtn />
     </StackLayout>
