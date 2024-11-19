@@ -2,11 +2,12 @@ import {StyleSheet, Text, View, Image} from 'react-native';
 
 const CollectionItem = ({collection}) => {
 
+
   return (
     <View style={styles.container}>
       {collection.image && (
         <Image 
-          source={{uri: collection.image}} 
+          source={{uri: collection.image.uri}} 
           style={styles.image}
           resizeMode="cover"
         />
