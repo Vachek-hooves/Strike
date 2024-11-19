@@ -47,7 +47,7 @@ const StackAllCollectionsScreen = () => {
       <ScrollView>
         {renderCollections()}
       </ScrollView>
-      <ReturnBtn />
+      <ReturnBtn style={{bottom:50,right:50}}/>
     </StackLayout>
   );
 };

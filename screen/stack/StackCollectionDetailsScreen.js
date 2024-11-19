@@ -1,16 +1,24 @@
-import { useEffect, useState } from 'react';
-import { StyleSheet, Text, View, Image, TouchableOpacity, Alert ,ScrollView} from 'react-native';
-import { useNavigation, useIsFocused } from '@react-navigation/native';
+import {useEffect, useState} from 'react';
+import {
+  StyleSheet,
+  Text,
+  View,
+  Image,
+  TouchableOpacity,
+  Alert,
+  ScrollView,
+} from 'react-native';
+import {useNavigation, useIsFocused} from '@react-navigation/native';
 import StackLayout from '../../components/layout/StackLayout';
 import ReturnBtn from '../../components/ui/ReturnBtn';
-import { useContextApp } from '../../store/context';
+import {useContextApp} from '../../store/context';
 import CollectionItemCard from '../../components/AllCollections/CollectionItemCard';
 
-const StackCollectionDetailsScreen = ({ route }) => {
-  const { collection: initialCollection } = route.params;
+const StackCollectionDetailsScreen = ({route}) => {
+  const {collection: initialCollection} = route.params;
   const [collection, setCollection] = useState(initialCollection);
   const navigation = useNavigation();
-  const { deleteCollection, getCollectionById } = useContextApp();
+  const {deleteCollection, getCollectionById} = useContextApp();
   const isFocused = useIsFocused();
 
   // Refresh collection data when screen is focused
@@ -44,7 +52,7 @@ const StackCollectionDetailsScreen = ({ route }) => {
             }
           },
         },
-      ]
+      ],
     );
   };
 
@@ -55,7 +63,7 @@ const StackCollectionDetailsScreen = ({ route }) => {
     });
   };
 
-  console.log(collection.items.map(item=>item.title));
+  console.log(collection.items.map(item => item.title));
 
   const renderItems = () => {
     if (collection.items.length === 0) {
@@ -63,7 +71,7 @@ const StackCollectionDetailsScreen = ({ route }) => {
     }
 
     return (
-      <ScrollView  style={styles.itemsSection}>
+      <ScrollView style={styles.itemsSection}>
         <Text style={styles.sectionTitle}>Items</Text>
         {collection.items.map(item => (
           <CollectionItemCard key={item.id} item={item} />
@@ -80,7 +88,7 @@ const StackCollectionDetailsScreen = ({ route }) => {
         {collection.image && (
           <View style={styles.imageContainer}>
             <Image
-              source={{ uri: collection.image.uri }}
+              source={{uri: collection.image.uri}}
               style={styles.image}
               resizeMode="cover"
             />
@@ -91,28 +99,22 @@ const StackCollectionDetailsScreen = ({ route }) => {
           <Text style={styles.description}>{collection.description}</Text>
         )}
 
-        
-      {  renderItems()}
-
+        {renderItems()}
 
         <View style={styles.buttonsContainer}>
-          <TouchableOpacity
-            style={styles.addButton}
-            onPress={handleAddItem}
-          >
+          <TouchableOpacity style={styles.addButton} onPress={handleAddItem}>
             <Text style={styles.addButtonText}>Add item</Text>
           </TouchableOpacity>
 
           <TouchableOpacity
             style={styles.deleteButton}
-            onPress={handleDeleteCollection}
-          >
+            onPress={handleDeleteCollection}>
             <Text style={styles.deleteButtonText}>Delete collection</Text>
           </TouchableOpacity>
         </View>
         {/* <View style={{height:80}}></View> */}
       </View>
-      {/* <ReturnBtn /> */}
+      <ReturnBtn style={{top: 50, right: 40}} />
     </StackLayout>
   );
 };
@@ -149,15 +151,14 @@ const styles = StyleSheet.create({
   },
   buttonsContainer: {
     gap: 12,
-    flexDirection:'row',
-   
+    flexDirection: 'row',
   },
   addButton: {
     backgroundColor: '#0A84FF',
     padding: 16,
     borderRadius: 8,
     alignItems: 'center',
-    flex:1
+    flex: 1,
   },
   addButtonText: {
     color: '#FFFFFF',
@@ -169,14 +170,14 @@ const styles = StyleSheet.create({
     padding: 16,
     borderRadius: 8,
     alignItems: 'center',
-    flex:1
+    flex: 1,
   },
   deleteButtonText: {
     color: '#FFFFFF',
     fontSize: 16,
     fontWeight: '600',
   },
-    itemsContainer: {
+  itemsContainer: {
     marginBottom: 20,
   },
   itemsCount: {

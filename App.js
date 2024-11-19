@@ -7,6 +7,7 @@ import {
   StackAllCollectionsScreen,
   StackCreateCollectionScreen,
   StackCollectionDetailsScreen,
+  StackItemDetailsScreen
 } from './screen/stack';
 import StackCreateCollectionItemScreen from './screen/stack/StackCreateCollectionItemScreen';
 const Stack = createNativeStackNavigator();
@@ -32,6 +33,10 @@ function App() {
           <Stack.Screen
             name="StackCreateCollectionItemScreen"
             component={StackCreateCollectionItemScreen}
+          />
+          <Stack.Screen
+            name="StackItemDetailsScreen"
+            component={StackItemDetailsScreen}
           />
         </Stack.Navigator>
       </NavigationContainer>
