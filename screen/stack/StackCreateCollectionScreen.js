@@ -5,8 +5,8 @@ import {
   TextInput,
   TouchableOpacity,
   Alert,
+  ScrollView,
 } from 'react-native';
-// import {COLLECTION_CATEGORIES} from '../../data/categories';
 import {useState} from 'react';
 import {isFormValid} from '../../utils/validations';
 import {useContextApp} from '../../store/context';
@@ -69,6 +69,9 @@ const StackCreateCollectionScreen = ({navigation}) => {
 
   return (
     <StackLayout>
+      <ScrollView>
+
+    
       <Text style={styles.title}>Create collection</Text>
       <CustomImagePicker onImageSelected={handleImageCategorySelected} />
 
@@ -123,13 +126,14 @@ const StackCreateCollectionScreen = ({navigation}) => {
         />
       )}
       
-
       {/* Create Button - only shown when form is valid */}
       {isValid && (
         <TouchableOpacity style={styles.createButton} onPress={handleCreate}>
           <Text style={styles.createButtonText}>Create</Text>
         </TouchableOpacity>
       )}
+      </ScrollView>
+      <View style={{height:70}}></View>
       <ReturnBtn style={{bottom:50,right:50,marginTop:20}}/>
       
     </StackLayout>
