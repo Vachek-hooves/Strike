@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   Alert,
   ImageBackground,
+  Image,
 } from 'react-native';
 import React, {useState, useEffect, useRef} from 'react';
 import TabLayou from '../../components/layout/TabLayou';
@@ -17,6 +18,7 @@ const TabUserScreen = () => {
   const [userName, setUserName] = useState('');
   const [userImage, setUserImage] = useState(null);
   const [isEditing, setIsEditing] = useState(false);
+  console.log('User image:', userImage);
 
   useEffect(() => {
     loadUserData();
@@ -71,6 +73,11 @@ const TabUserScreen = () => {
                 initialImage={userImage}
               />
             </View>
+            {/* <Image
+              source={{uri: userImage.image.uri}}
+              style={styles.image}
+              resizeMode="cover"
+            /> */}
             {/* <ImageBackground
               source={require('../../assets/profilebg/level31.png')}
               style={styles.levelBackground}
