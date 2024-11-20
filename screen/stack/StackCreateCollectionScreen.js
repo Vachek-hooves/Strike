@@ -52,7 +52,7 @@ const StackCreateCollectionScreen = ({navigation}) => {
       setCustomCategory('');
       setDescription('');
       // Show success message
-      Alert.alert('Success', 'Collection created successfully!');
+      // Alert.alert('Success', 'Collection created successfully!');
       navigation.navigate('StackAllCollectionsScreen')
 
       // Navigate back or to another screen
