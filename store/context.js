@@ -1,5 +1,7 @@
 import {createContext, useContext, useState, useEffect} from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+// import Toast from 'react-native-toast-message';
+import { showToast } from '../config/toast/toastConfig';
 
 const Context = createContext({
   collections: [],
@@ -76,6 +78,7 @@ export const ContextProvider = ({children}) => {
       const updatedCollections = [newCollection, ...collections];
       setCollections(updatedCollections);
       await AsyncStorage.setItem('collections', JSON.stringify(updatedCollections));
+      showToast('success', 'Collection Created', `${name} collection has been created successfully!`);
 
       // Existing achievements
       if (collections.length === 0) {
@@ -101,6 +104,7 @@ export const ContextProvider = ({children}) => {
       return true;
     } catch (error) {
       console.error('Error adding collection:', error);
+      showToast('error', 'Error', 'Failed to create collection');
       return false;
     }
   };
@@ -123,14 +127,17 @@ export const ContextProvider = ({children}) => {
 
   const deleteCollection = async (id) => {
     try {
+        const collection = collections.find(c => c.id === id);
       const updatedCollections = collections.filter(
         collection => collection.id !== id
       );
       setCollections(updatedCollections);
       await AsyncStorage.setItem('collections', JSON.stringify(updatedCollections));
+      showToast('success', 'Collection Deleted', `${collection.name} has been deleted`);
       return true;
     } catch (error) {
-      console.error('Error deleting collection:', error);
+    //   console.error('Error deleting collection:', error);
+    showToast('error', 'Error', 'Failed to delete collection');
       return false;
     }
   };
@@ -157,6 +164,7 @@ export const ContextProvider = ({children}) => {
 
       setCollections(updatedCollections);
       await AsyncStorage.setItem('collections', JSON.stringify(updatedCollections));
+      showToast('success', 'Item Added', `Item has been added to collection`);
 
       const collection = collections.find(c => c.id === collectionId);
       const newItemCount = collection.items.length + 1;
@@ -164,20 +172,24 @@ export const ContextProvider = ({children}) => {
       // Existing achievements
       if (newItemCount === 1) {
         await updateAchievement('firstItem', 30);
+        showToast('success', 'Achievement Unlocked! 🏆', 'Added your first item');
       }
       if (newItemCount === 10) {
         await updateAchievement('collector10Items', 50);
-      }
-
-      // New category-specific achievements
-      if (collection.category.toLowerCase() === 'stamps' && newItemCount % 5 === 0) {
+        showToast('success', 'Achievement Unlocked! 🏆', 'Collector of 10 items');
+    }
+    
+    // New category-specific achievements
+    if (collection.category.toLowerCase() === 'stamps' && newItemCount % 5 === 0) {
         // Award points for every 5 stamps
         await updateAchievement('fanOfStamps', 20);
+        showToast('success', 'Achievement Unlocked! 🏆', 'Stamp Collection Milestone');
       }
 
       if (collection.category.toLowerCase() === 'books' && newItemCount % 6 === 0) {
         // Award points for every 6 books
         await updateAchievement('bookCollector', 25);
+        showToast('success', 'Achievement Unlocked! 🏆', 'Book Collection Milestone');
       }
 
       // Add base points for adding an item
@@ -197,6 +209,9 @@ export const ContextProvider = ({children}) => {
 
   const deleteItemFromCollection = async (collectionId, itemId) => {
     try {
+        const collection = collections.find(c => c.id === collectionId);
+        const item = collection.items.find(i => i.id === itemId);
+
       const updatedCollections = collections.map(collection => {
         if (collection.id === collectionId) {
           return {
@@ -209,24 +224,42 @@ export const ContextProvider = ({children}) => {
 
       setCollections(updatedCollections);
       await AsyncStorage.setItem('collections', JSON.stringify(updatedCollections));
+      showToast('success', 'Item Deleted', `Item has been removed from ${collection.name}`);
       return true;
     } catch (error) {
-      console.error('Error deleting item:', error);
+    //   console.error('Error deleting item:', error);
+    showToast('error', 'Error', 'Failed to delete item');
       return false;
     }
   };
 
-  const updateAchievement = async (achievementId, points) => {
+//   const updateAchievement = async (achievementId, points) => {
+//     try {
+//       const newAchievements = {
+//         ...achievements,
+//         [achievementId]: true,
+//       };
+//       setAchievements(newAchievements);
+//       await AsyncStorage.setItem('achievements', JSON.stringify(newAchievements));
+//       await updateScores(points);
+//     } catch (error) {
+//       console.error('Error updating achievement:', error);
+//     }
+//   };
+
+const updateAchievement = async (achievementId, points) => {
     try {
-      const newAchievements = {
-        ...achievements,
-        [achievementId]: true,
-      };
-      setAchievements(newAchievements);
-      await AsyncStorage.setItem('achievements', JSON.stringify(newAchievements));
-      await updateScores(points);
+      if (!achievements[achievementId]) {  // Only if achievement not already earned
+        const newAchievements = {
+          ...achievements,
+          [achievementId]: true,
+        };
+        setAchievements(newAchievements);
+        await AsyncStorage.setItem('achievements', JSON.stringify(newAchievements));
+        await updateScores(points);
+      }
     } catch (error) {
-      console.error('Error updating achievement:', error);
+      showToast('error', 'Error', 'Failed to update achievement');
     }
   };
 

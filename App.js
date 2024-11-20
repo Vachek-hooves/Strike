@@ -1,6 +1,5 @@
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-
 import {ContextProvider} from './store/context';
 import TabContainer from './TabNavigation/TabContainer';
 import {
@@ -10,6 +9,10 @@ import {
   StackItemDetailsScreen
 } from './screen/stack';
 import StackCreateCollectionItemScreen from './screen/stack/StackCreateCollectionItemScreen';
+import Toast from 'react-native-toast-message';
+
+
+
 const Stack = createNativeStackNavigator();
 
 function App() {
@@ -40,6 +43,7 @@ function App() {
           />
         </Stack.Navigator>
       </NavigationContainer>
+      <Toast />
     </ContextProvider>
   );
 }
