@@ -7,11 +7,10 @@ import {
   StackCreateCollectionScreen,
   StackCollectionDetailsScreen,
   StackItemDetailsScreen,
-  WelcomeScreen
+  WelcomeScreen,
 } from './screen/stack';
 import StackCreateCollectionItemScreen from './screen/stack/StackCreateCollectionItemScreen';
 import Toast from 'react-native-toast-message';
-
 
 
 const Stack = createNativeStackNavigator();
@@ -21,7 +20,7 @@ function App() {
     <ContextProvider>
       <NavigationContainer>
         <Stack.Navigator screenOptions={{headerShown: false}}>
-          <Stack.Screen name='Welcome' component={WelcomeScreen}/>
+          <Stack.Screen name="Welcome" component={WelcomeScreen} />
           <Stack.Screen name="Tab" component={TabContainer} />
           <Stack.Screen
             name="StackAllCollectionsScreen"
