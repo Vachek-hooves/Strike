@@ -69,7 +69,7 @@ const WelcomeScreen = () => {
                 }
               ]}
             >
-              Rare{'\n'}Collections
+              Legacy Strike {'\n'} Hold Your Collections
             </Animated.Text>
             
             <Animated.Text 
@@ -80,7 +80,7 @@ const WelcomeScreen = () => {
                 }
               ]}
             >
-              Strike Win
+              Welcome
             </Animated.Text>
 
             <Animated.Image 
