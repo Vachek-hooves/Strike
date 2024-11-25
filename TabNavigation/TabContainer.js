@@ -6,8 +6,13 @@ import {
   TabUserScreen,
 } from '../screen/tab';
 import {useEffect, useState} from 'react';
-import {TouchableOpacity, Text,AppState,StyleSheet,} from 'react-native';
-import { toggleBackgroundMusic,setupPlayer,pauseBackgroundMusic,playBackgroundMusic } from '../config/sound/setPlay';
+import {TouchableOpacity, Text, AppState, StyleSheet} from 'react-native';
+import {
+  toggleBackgroundMusic,
+  setupPlayer,
+  pauseBackgroundMusic,
+  playBackgroundMusic,
+} from '../config/sound/setPlay';
 
 const Tab = createBottomTabNavigator();
 

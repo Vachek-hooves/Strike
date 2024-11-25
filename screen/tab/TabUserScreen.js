@@ -209,6 +209,7 @@ const styles = StyleSheet.create({
     marginTop: 12,
     flexDirection: 'row',
     justifyContent: 'center',
+    borderWidth: 2,
   },
   buttonIcon: {
     marginRight: 8,
@@ -224,6 +225,7 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     width: '80%',
     alignItems: 'center',
+    borderWidth: 2,
   },
   imageContainer: {
     width: 180,
@@ -258,7 +260,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     zIndex: 3,
-    shadowColor: "#000",
+    shadowColor: '#000',
     shadowOffset: {
       width: 0,
       height: 2,

@@ -114,7 +114,7 @@ const StackCollectionDetailsScreen = ({route}) => {
         </View>
       </View>
         {/* <View style={{height:80}}></View> */}
-      <ReturnBtn style={{top: 50, right: 40}} />
+      <ReturnBtn style={{top: '3%', right: 40}} />
     </StackLayout>
   );
 };

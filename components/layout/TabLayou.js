@@ -1,7 +1,7 @@
-import {StyleSheet, View, SafeAreaView} from 'react-native';
+import {StyleSheet, View, SafeAreaView, ImageBackground} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 
-const TabLayou = ({children}) => {
+const TabLayou = ({children,style}) => {
   return (
     <View style={styles.container}>
       <LinearGradient
@@ -10,7 +10,13 @@ const TabLayou = ({children}) => {
         end={{x: 1, y: 1}}
         locations={[0, 0.5, 1]}
         style={styles.gradient}>
-        <SafeAreaView style={styles.safeArea}>{children}</SafeAreaView>
+        <SafeAreaView style={styles.safeArea}>
+          <ImageBackground
+            style={styles.imgage}
+            source={require('../../assets/bg/bg.png')}>
+            {children}
+          </ImageBackground>
+        </SafeAreaView>
       </LinearGradient>
     </View>
   );
@@ -28,6 +34,9 @@ const styles = StyleSheet.create({
     padding: 16,
   },
   gradient: {
+    flex: 1,
+  },
+  imgage: {
     flex: 1,
   },
 });

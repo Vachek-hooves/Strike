@@ -1,21 +1,27 @@
-import {StyleSheet, Text, View, TextInput, TouchableOpacity, Alert} from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  View,
+  TextInput,
+  TouchableOpacity,
+  Alert,
+} from 'react-native';
 import {useState} from 'react';
 import StackLayout from '../../components/layout/StackLayout';
 import ReturnBtn from '../../components/ui/ReturnBtn';
 import CustomImagePicker from '../../components/ui/ImagePicker';
 import {useContextApp} from '../../store/context';
 
-
-const StackCreateCollectionItemScreen = ({route,navigation}) => {
+const StackCreateCollectionItemScreen = ({route, navigation}) => {
   const {collectionId, collectionName} = route.params;
   const {addItemToCollection} = useContextApp();
-  
+
   const [title, setTitle] = useState('');
   const [cost, setCost] = useState('');
   const [description, setDescription] = useState('');
   const [itemImage, setItemImage] = useState(null);
 
-  const handleImageSelected = (image) => {
+  const handleImageSelected = image => {
     setItemImage(image);
   };
 
@@ -38,7 +44,7 @@ const StackCreateCollectionItemScreen = ({route,navigation}) => {
       setCost('');
       setDescription('');
       setItemImage(null);
-      
+
       navigation.goBack();
     } else {
       Alert.alert('Error', 'Failed to add item');
@@ -49,8 +55,8 @@ const StackCreateCollectionItemScreen = ({route,navigation}) => {
     <StackLayout>
       <View style={styles.container}>
         <Text style={styles.title}>Add item</Text>
-        
-        <CustomImagePicker 
+
+        <CustomImagePicker
           onImageSelected={handleImageSelected}
           style={styles.imagePicker}
         />
@@ -84,15 +90,12 @@ const StackCreateCollectionItemScreen = ({route,navigation}) => {
         />
 
         {title.trim() !== '' && (
-          <TouchableOpacity 
-            style={styles.addButton}
-            onPress={handleAddItem}
-          >
+          <TouchableOpacity style={styles.addButton} onPress={handleAddItem}>
             <Text style={styles.addButtonText}>Add item</Text>
           </TouchableOpacity>
         )}
       </View>
-      <ReturnBtn />
+      <ReturnBtn style={{bottom: '6%', right: 40}} />
     </StackLayout>
   );
 };
@@ -131,6 +134,8 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     alignItems: 'center',
     marginTop: 20,
+    borderColor: '#000',
+    borderWidth:2
   },
   addButtonText: {
     color: '#FFFFFF',
