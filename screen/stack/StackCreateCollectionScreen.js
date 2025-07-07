@@ -5,6 +5,7 @@ import {
   TextInput,
   TouchableOpacity,
   Alert,
+  ScrollView,
 } from 'react-native';
 // import {COLLECTION_CATEGORIES} from '../../data/categories';
 import {useState} from 'react';
@@ -69,69 +70,74 @@ const StackCreateCollectionScreen = ({navigation}) => {
 
   return (
     <StackLayout>
-      <Text style={styles.title}>Create collection</Text>
-      <CustomImagePicker onImageSelected={handleImageCategorySelected} />
+      <ScrollView 
+        style={styles.scrollView}
+        contentContainerStyle={styles.scrollContent}
+        showsVerticalScrollIndicator={false}
+      >
+        <Text style={styles.title}>Create collection</Text>
+        <CustomImagePicker onImageSelected={handleImageCategorySelected} />
 
-      {/* Collection Name Input */}
-      <TextInput
-        style={styles.input}
-        placeholder="Collection name"
-        value={collectionName}
-        onChangeText={setCollectionName}
-        placeholderTextColor="#666"
-      />
-
-      {/* Description Input */}
-      <TextInput
-        style={styles.input}
-        placeholder="Description"
-        value={description}
-        onChangeText={setDescription}
-        placeholderTextColor="#666"
-        multiline={true}
-        numberOfLines={3}
-        textAlignVertical='top'
-        height={100}
-        lineHeight={20}
-        paddingTop={10}
-      />
-
-      {/* Dropdown Header */}
-      <TouchableOpacity
-        style={styles.dropdownHeader}
-        onPress={() => setIsDropdownOpen(!isDropdownOpen)}>
-        <Text style={styles.dropdownHeaderText}>
-          {selectedCategory || 'Collection category'}
-        </Text>
-      </TouchableOpacity>
-
-      
-      <DropDownMenu
-        selectedCategory={selectedCategory}
-        setSelectedCategory={handleCategorySelect}
-        isDropdownOpen={isDropdownOpen}
-      />
-
-      {/* Custom Category Input - Only shown when "Other" is selected */}
-      {selectedCategory === 'Other' && (
+        {/* Collection Name Input */}
         <TextInput
-          style={[styles.input, styles.customCategoryInput]}
-          placeholder="Enter custom category"
-          value={customCategory}
-          onChangeText={setCustomCategory}
+          style={styles.input}
+          placeholder="Collection name"
+          value={collectionName}
+          onChangeText={setCollectionName}
           placeholderTextColor="#666"
         />
-      )}
-      
 
-      {/* Create Button - only shown when form is valid */}
-      {isValid && (
-        <TouchableOpacity style={styles.createButton} onPress={handleCreate}>
-          <Text style={styles.createButtonText}>Create</Text>
+        {/* Description Input */}
+        <TextInput
+          style={styles.input}
+          placeholder="Description"
+          value={description}
+          onChangeText={setDescription}
+          placeholderTextColor="#666"
+          multiline={true}
+          numberOfLines={3}
+          textAlignVertical='top'
+          height={100}
+          lineHeight={20}
+          paddingTop={10}
+        />
+
+        {/* Dropdown Header */}
+        <TouchableOpacity
+          style={styles.dropdownHeader}
+          onPress={() => setIsDropdownOpen(!isDropdownOpen)}>
+          <Text style={styles.dropdownHeaderText}>
+            {selectedCategory || 'Collection category'}
+          </Text>
         </TouchableOpacity>
-      )}
-      <ReturnBtn style={{bottom:50,right:50,marginTop:20}}/>
-      
+
+        
+        <DropDownMenu
+          selectedCategory={selectedCategory}
+          setSelectedCategory={handleCategorySelect}
+          isDropdownOpen={isDropdownOpen}
+        />
+
+        {/* Custom Category Input - Only shown when "Other" is selected */}
+        {selectedCategory === 'Other' && (
+          <TextInput
+            style={[styles.input, styles.customCategoryInput]}
+            placeholder="Enter custom category"
+            value={customCategory}
+            onChangeText={setCustomCategory}
+            placeholderTextColor="#666"
+          />
+        )}
+        
+
+        {/* Create Button - only shown when form is valid */}
+        {isValid && (
+          <TouchableOpacity style={styles.createButton} onPress={handleCreate}>
+            <Text style={styles.createButtonText}>Create</Text>
+          </TouchableOpacity>
+        )}
+        {/* <ReturnBtn style={{bottom:50,right:50,marginTop:20}}/> */}
+      </ScrollView>
     </StackLayout>
   );
 };
@@ -139,7 +145,13 @@ const StackCreateCollectionScreen = ({navigation}) => {
 export default StackCreateCollectionScreen;
 
 const styles = StyleSheet.create({
- 
+  scrollView: {
+    flex: 1,
+  },
+  scrollContent: {
+    flexGrow: 1,
+    padding: 20,
+  },
   title: {
     fontSize: 28,
     fontWeight: 'bold',

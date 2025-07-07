@@ -92,7 +92,7 @@ const StackCreateCollectionItemScreen = ({route,navigation}) => {
           </TouchableOpacity>
         )}
       </View>
-      <ReturnBtn />
+      {/* <ReturnBtn /> */}
     </StackLayout>
   );
 };

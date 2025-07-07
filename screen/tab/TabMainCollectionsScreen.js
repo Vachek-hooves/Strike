@@ -1,38 +1,44 @@
-import { StyleSheet, Text, View, TouchableOpacity, Image } from 'react-native'
+import { StyleSheet, Text, View, TouchableOpacity, Image, ScrollView } from 'react-native'
 import TabLayou from '../../components/layout/TabLayou'
 
 
 const TabMainCollectionsScreen = ({navigation}) => {
   return (
     <TabLayou>
-      <View style={styles.container}>
-        <Text style={styles.title}>Collection</Text>
-        
-        <View style={styles.cardContainer}>
-          <View style={styles.emptyStateContainer}>
-            <Image 
-              source={require('../../assets/image/box.png')}
-              style={styles.emptyStateImage}
-            />
-            <Text style={styles.emptyStateTitle}>There's nothing here yet</Text>
-            <Text style={styles.emptyStateSubtitle}>Tap on the button to create a collection</Text>
-            
-            <TouchableOpacity 
-              style={styles.createButton}
-              onPress={() => navigation.navigate('StackCreateCollectionScreen')}
-            >
-              <Text style={styles.buttonText}>Create a collection</Text>
-            </TouchableOpacity>
+      <ScrollView 
+        style={styles.scrollView}
+        contentContainerStyle={styles.scrollContent}
+        showsVerticalScrollIndicator={false}
+      >
+        <View style={styles.container}>
+          <Text style={styles.title}>Collection</Text>
+          
+          <View style={styles.cardContainer}>
+            <View style={styles.emptyStateContainer}>
+              <Image 
+                source={require('../../assets/image/box.png')}
+                style={styles.emptyStateImage}
+              />
+              <Text style={styles.emptyStateTitle}>There's nothing here yet</Text>
+              <Text style={styles.emptyStateSubtitle}>Tap on the button to create a collection</Text>
+              
+              <TouchableOpacity 
+                style={styles.createButton}
+                onPress={() => navigation.navigate('StackCreateCollectionScreen')}
+              >
+                <Text style={styles.buttonText}>Create a collection</Text>
+              </TouchableOpacity>
+            </View>
           </View>
-        </View>
 
-        <TouchableOpacity 
-          style={styles.button}
-          onPress={() => navigation.navigate('StackAllCollectionsScreen')}
-        >
-          <Text style={styles.buttonText}>All Collections</Text>
-        </TouchableOpacity>
-      </View>
+          <TouchableOpacity 
+            style={styles.button}
+            onPress={() => navigation.navigate('StackAllCollectionsScreen')}
+          >
+            <Text style={styles.buttonText}>All Collections</Text>
+          </TouchableOpacity>
+        </View>
+      </ScrollView>
     </TabLayou>
   )
 }
@@ -40,10 +46,17 @@ const TabMainCollectionsScreen = ({navigation}) => {
 export default TabMainCollectionsScreen
 
 const styles = StyleSheet.create({
+  scrollView: {
+    flex: 1,
+  },
+  scrollContent: {
+    flexGrow: 1,
+  },
   container: {
     flex: 1,
     backgroundColor: '#000000',
     padding: 16,
+    minHeight: '100%',
   },
   title: {
     fontSize: 32,

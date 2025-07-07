@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   Alert,
   ImageBackground,
+  ScrollView,
 } from 'react-native';
 import React, {useState, useEffect, useRef} from 'react';
 import TabLayou from '../../components/layout/TabLayou';
@@ -60,75 +61,81 @@ const TabUserScreen = () => {
 
   return (
     <TabLayou>
-      <View style={styles.container}>
-        <Text style={styles.title}>Profile</Text>
+      <ScrollView 
+        style={styles.scrollView}
+        contentContainerStyle={styles.scrollContent}
+        showsVerticalScrollIndicator={false}
+      >
+        <View style={styles.container}>
+          <Text style={styles.title}>Profile</Text>
 
-        <View style={styles.profileContainer}>
-          <View style={styles.imageContainer}>
-            <View style={styles.imageWrapper}>
-              <CustomImagePicker
-                onImageSelected={handleImageSelected}
-                initialImage={userImage}
-              />
-            </View>
-            {/* <ImageBackground
-              source={require('../../assets/profilebg/level31.png')}
-              style={styles.levelBackground}
-              resizeMode="contain"
-            /> */}
-          </View>
-
-          {isEditing ? (
-            <View style={styles.editContainer}>
-              <View style={styles.inputContainer}>
-                <TextInput
-                  style={styles.input}
-                  placeholder="Enter your name"
-                  placeholderTextColor="#666"
-                  value={userName}
-                  onChangeText={setUserName}
-                />
-                <Icon
-                  name="pencil"
-                  size={20}
-                  color="#666"
-                  style={styles.inputIcon}
+          <View style={styles.profileContainer}>
+            <View style={styles.imageContainer}>
+              <View style={styles.imageWrapper}>
+                <CustomImagePicker
+                  onImageSelected={handleImageSelected}
+                  initialImage={userImage}
                 />
               </View>
-              <TouchableOpacity style={styles.saveButton} onPress={handleSave}>
-                <Text style={styles.buttonText}>Save</Text>
-              </TouchableOpacity>
+              {/* <ImageBackground
+                source={require('../../assets/profilebg/level31.png')}
+                style={styles.levelBackground}
+                resizeMode="contain"
+              /> */}
             </View>
-          ) : (
-            <View style={styles.displayContainer}>
-              <TouchableOpacity
-                style={styles.nameContainer}
-                onPress={() => setIsEditing(true)}>
-                <Text style={styles.userName}>
-                  {userName || 'Add your name'}
-                </Text>
-                <Icon
-                  name="pencil"
-                  size={20}
-                  color="#0A84FF"
-                  style={styles.editIcon}
-                />
-              </TouchableOpacity>
-              <TouchableOpacity
-                style={styles.editButton}
-                onPress={() => setIsEditing(true)}>
-                <Icon
-                  name="create-outline"
-                  size={20}
-                  color="#FFFFFF"
-                  style={styles.buttonIcon}
-                />
-                <Text style={styles.buttonText}>Edit Profile</Text>
-              </TouchableOpacity>
-            </View>
-          )}
+
+            {isEditing ? (
+              <View style={styles.editContainer}>
+                <View style={styles.inputContainer}>
+                  <TextInput
+                    style={styles.input}
+                    placeholder="Enter your name"
+                    placeholderTextColor="#666"
+                    value={userName}
+                    onChangeText={setUserName}
+                  />
+                  <Icon
+                    name="pencil"
+                    size={20}
+                    color="#666"
+                    style={styles.inputIcon}
+                  />
+                </View>
+                <TouchableOpacity style={styles.saveButton} onPress={handleSave}>
+                  <Text style={styles.buttonText}>Save</Text>
+                </TouchableOpacity>
+              </View>
+            ) : (
+              <View style={styles.displayContainer}>
+                <TouchableOpacity
+                  style={styles.nameContainer}
+                  onPress={() => setIsEditing(true)}>
+                  <Text style={styles.userName}>
+                    {userName || 'Add your name'}
+                  </Text>
+                  <Icon
+                    name="pencil"
+                    size={20}
+                    color="#0A84FF"
+                    style={styles.editIcon}
+                  />
+                </TouchableOpacity>
+                <TouchableOpacity
+                  style={styles.editButton}
+                  onPress={() => setIsEditing(true)}>
+                  <Icon
+                    name="create-outline"
+                    size={20}
+                    color="#FFFFFF"
+                    style={styles.buttonIcon}
+                  />
+                  <Text style={styles.buttonText}>Edit Profile</Text>
+                </TouchableOpacity>
+              </View>
+            )}
+          </View>
         </View>
-      </View>
+      </ScrollView>
     </TabLayou>
   );
 };
@@ -136,9 +143,16 @@ const TabUserScreen = () => {
 export default TabUserScreen;
 
 const styles = StyleSheet.create({
+  scrollView: {
+    flex: 1,
+  },
+  scrollContent: {
+    flexGrow: 1,
+  },
   container: {
     flex: 1,
     padding: 20,
+    minHeight: '100%',
   },
   title: {
     fontSize: 28,

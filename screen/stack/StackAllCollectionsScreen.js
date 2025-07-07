@@ -32,23 +32,29 @@ const StackAllCollectionsScreen = () => {
 
   return (
     <StackLayout>
-      <View style={styles.header}>
-        <Text style={styles.title}>All Collections</Text>
-      </View>
+      <ScrollView 
+        style={styles.scrollView}
+        contentContainerStyle={styles.scrollContent}
+        showsVerticalScrollIndicator={false}
+      >
+        <View style={styles.header}>
+          <Text style={styles.title}>All Collections</Text>
+        </View>
 
-      {/* {renderFilterMenu()} */}
-      <CategoryFIlter
-        categories={categories}
-        selectedCategory={selectedCategory}
-        setSelectedCategory={setSelectedCategory}
-        isFilterOpen={isFilterOpen}
-        setIsFilterOpen={setIsFilterOpen}
-      />
-      <ScrollView>
+        {/* {renderFilterMenu()} */}
+        <CategoryFIlter
+          categories={categories}
+          selectedCategory={selectedCategory}
+          setSelectedCategory={setSelectedCategory}
+          isFilterOpen={isFilterOpen}
+          setIsFilterOpen={setIsFilterOpen}
+        />
+        
         {renderCollections()}
+        
+        <View style={{height:100}}></View>
+        {/* <ReturnBtn style={{bottom:50,right:50}}/> */}
       </ScrollView>
-      <View style={{height:100}}></View>
-      <ReturnBtn style={{bottom:50,right:50}}/>
     </StackLayout>
   );
 };
@@ -56,6 +62,13 @@ const StackAllCollectionsScreen = () => {
 export default StackAllCollectionsScreen;
 
 const styles = StyleSheet.create({
+  scrollView: {
+    flex: 1,
+  },
+  scrollContent: {
+    flexGrow: 1,
+    padding: 20,
+  },
   header: {
     marginBottom: 20,
   },

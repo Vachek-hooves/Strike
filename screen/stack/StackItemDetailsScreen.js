@@ -65,7 +65,7 @@ const StackItemDetailsScreen = ({route}) => {
           <Text style={styles.deleteButtonText}>Delete item</Text>
         </TouchableOpacity>
       </View>
-      <ReturnBtn style={{top:50,right:50}}/>
+      {/* <ReturnBtn style={{top:50,right:50}}/> */}
     </StackLayout>
   );
 };

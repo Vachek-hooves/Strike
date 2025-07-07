@@ -62,9 +62,11 @@ const TabAchievScreen = () => {
 
   return (
     <TabLayou>
-
-    
-    {/* <View style={styles.container}> */}
+      <ScrollView 
+        style={styles.scrollView}
+        contentContainerStyle={styles.scrollContent}
+        showsVerticalScrollIndicator={false}
+      >
         {/* Header with total points */}
         <View style={styles.headerContainer}>
           <Text style={styles.title}>Achievements & progress</Text>
@@ -77,7 +79,6 @@ const TabAchievScreen = () => {
           </View>
         </View>
 
-      <ScrollView>
         {/* Achievement list */}
         {ACHIEVEMENTS.map((achievement) => (
           <View 
@@ -109,7 +110,6 @@ const TabAchievScreen = () => {
           </View>
         ))}
       </ScrollView>
-    {/* </View> */}
     </TabLayou>
   )
 }
@@ -117,6 +117,12 @@ const TabAchievScreen = () => {
 export default TabAchievScreen
 
 const styles = StyleSheet.create({
+  scrollView: {
+    flex: 1,
+  },
+  scrollContent: {
+    flexGrow: 1,
+  },
   awardFrame: {
     width: '10%',
     height: '100%',
