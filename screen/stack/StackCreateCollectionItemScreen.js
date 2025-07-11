@@ -1,21 +1,27 @@
-import {StyleSheet, Text, View, TextInput, TouchableOpacity, Alert} from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  View,
+  TextInput,
+  TouchableOpacity,
+  Alert,
+} from 'react-native';
 import {useState} from 'react';
 import StackLayout from '../../components/layout/StackLayout';
 import ReturnBtn from '../../components/ui/ReturnBtn';
 import CustomImagePicker from '../../components/ui/ImagePicker';
 import {useContextApp} from '../../store/context';
 
-
-const StackCreateCollectionItemScreen = ({route,navigation}) => {
+const StackCreateCollectionItemScreen = ({route, navigation}) => {
   const {collectionId, collectionName} = route.params;
   const {addItemToCollection} = useContextApp();
-  
+
   const [title, setTitle] = useState('');
   const [cost, setCost] = useState('');
   const [description, setDescription] = useState('');
   const [itemImage, setItemImage] = useState(null);
 
-  const handleImageSelected = (image) => {
+  const handleImageSelected = image => {
     setItemImage(image);
   };
 
@@ -38,7 +44,7 @@ const StackCreateCollectionItemScreen = ({route,navigation}) => {
       setCost('');
       setDescription('');
       setItemImage(null);
-      
+
       navigation.goBack();
     } else {
       Alert.alert('Error', 'Failed to add item');
@@ -49,8 +55,8 @@ const StackCreateCollectionItemScreen = ({route,navigation}) => {
     <StackLayout>
       <View style={styles.container}>
         <Text style={styles.title}>Add item</Text>
-        
-        <CustomImagePicker 
+
+        <CustomImagePicker
           onImageSelected={handleImageSelected}
           style={styles.imagePicker}
         />
@@ -60,7 +66,7 @@ const StackCreateCollectionItemScreen = ({route,navigation}) => {
           placeholder="Title"
           value={title}
           onChangeText={setTitle}
-          placeholderTextColor="#666"
+          placeholderTextColor="#FFF"
         />
 
         <TextInput
@@ -69,7 +75,7 @@ const StackCreateCollectionItemScreen = ({route,navigation}) => {
           value={cost}
           onChangeText={setCost}
           keyboardType="decimal-pad"
-          placeholderTextColor="#666"
+          placeholderTextColor="#FFF"
         />
 
         <TextInput
@@ -80,14 +86,11 @@ const StackCreateCollectionItemScreen = ({route,navigation}) => {
           multiline={true}
           numberOfLines={4}
           textAlignVertical="top"
-          placeholderTextColor="#666"
+          placeholderTextColor="#FFF"
         />
 
         {title.trim() !== '' && (
-          <TouchableOpacity 
-            style={styles.addButton}
-            onPress={handleAddItem}
-          >
+          <TouchableOpacity style={styles.addButton} onPress={handleAddItem}>
             <Text style={styles.addButtonText}>Add item</Text>
           </TouchableOpacity>
         )}
@@ -114,7 +117,7 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   input: {
-    backgroundColor: '#1C1C1E',
+    backgroundColor: '#2F4F4F',
     padding: 15,
     borderRadius: 8,
     color: '#FFFFFF',
@@ -126,7 +129,7 @@ const styles = StyleSheet.create({
     paddingTop: 12,
   },
   addButton: {
-    backgroundColor: '#0A84FF',
+    backgroundColor: '#2F4F4F',
     padding: 16,
     borderRadius: 8,
     alignItems: 'center',

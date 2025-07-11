@@ -80,7 +80,7 @@ android {
 
     namespace "com.strike"
     defaultConfig {
-        applicationId "com.strike.coin.collection.keep.save.gain"
+        applicationId "strike.save.coin.collection"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1

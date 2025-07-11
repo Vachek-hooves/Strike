@@ -38,7 +38,7 @@ export default DropDownMenu;
 
 const styles = StyleSheet.create({
   dropdownMenu: {
-    backgroundColor: '#1C1C1E',
+    backgroundColor: '#2F4F4F',
     borderRadius: 8,
     overflow: 'hidden',
     height: '30%',
@@ -49,7 +49,7 @@ const styles = StyleSheet.create({
     borderBottomColor: '#2C2C2E',
   },
   selectedItem: {
-    backgroundColor: '#0A84FF',
+    backgroundColor: '#D4AF37',
   },
   dropdownItemText: {
     color: '#FFFFFF',

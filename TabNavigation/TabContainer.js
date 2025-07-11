@@ -11,19 +11,18 @@ const Tab = createBottomTabNavigator();
 
 const TabContainer = () => {
   return (
-    <Tab.Navigator 
+    <Tab.Navigator
       screenOptions={{
         headerShown: false,
         tabBarStyle: styles.tabBar,
         tabBarShowLabel: true,
-        tabBarActiveTintColor: '#0A84FF',
+        tabBarActiveTintColor: '#FFFFFF',
         tabBarInactiveTintColor: '#666',
         tabBarLabelStyle: styles.tabLabel,
         tabBarItemStyle: styles.tabBarItem,
         tabBarIconStyle: styles.tabBarIcon,
-      }}
-    >
-      <Tab.Screen 
+      }}>
+      <Tab.Screen
         name="Profile"
         component={TabUserScreen}
         options={{
@@ -41,7 +40,7 @@ const TabContainer = () => {
           ),
         }}
       />
-      <Tab.Screen 
+      <Tab.Screen
         name="Progress"
         component={TabAchievScreen}
         options={{
@@ -56,11 +55,13 @@ const TabContainer = () => {
 
 const styles = StyleSheet.create({
   tabBar: {
-    backgroundColor: '#000000',
+    backgroundColor: '#0A84FF',
     borderTopWidth: 0,
     height: 100,
     paddingBottom: 5,
-    
+    marginHorizontal: 10,
+    position: 'absolute',
+    borderRadius: 20,
   },
   tabBarItem: {
     paddingTop: 2,
@@ -76,7 +77,7 @@ const styles = StyleSheet.create({
     // paddingTop: 6,
     height: 60,
     width: 60,
-  }
+  },
 });
 
 export default TabContainer;

@@ -61,11 +61,10 @@ const TabUserScreen = () => {
 
   return (
     <TabLayou>
-      <ScrollView 
+      <ScrollView
         style={styles.scrollView}
         contentContainerStyle={styles.scrollContent}
-        showsVerticalScrollIndicator={false}
-      >
+        showsVerticalScrollIndicator={false}>
         <View style={styles.container}>
           <Text style={styles.title}>Profile</Text>
 
@@ -101,7 +100,9 @@ const TabUserScreen = () => {
                     style={styles.inputIcon}
                   />
                 </View>
-                <TouchableOpacity style={styles.saveButton} onPress={handleSave}>
+                <TouchableOpacity
+                  style={styles.saveButton}
+                  onPress={handleSave}>
                   <Text style={styles.buttonText}>Save</Text>
                 </TouchableOpacity>
               </View>
@@ -116,7 +117,7 @@ const TabUserScreen = () => {
                   <Icon
                     name="pencil"
                     size={20}
-                    color="#0A84FF"
+                    color="#D4AF37"
                     style={styles.editIcon}
                   />
                 </TouchableOpacity>
@@ -208,7 +209,7 @@ const styles = StyleSheet.create({
     marginLeft: 8,
   },
   editButton: {
-    backgroundColor: '#0A84FF',
+    backgroundColor: '#D4AF37',
     padding: 16,
     borderRadius: 8,
     width: '80%',
@@ -226,7 +227,7 @@ const styles = StyleSheet.create({
     fontWeight: '600',
   },
   saveButton: {
-    backgroundColor: '#0A84FF',
+    backgroundColor: '#D4AF37',
     padding: 16,
     borderRadius: 8,
     width: '80%',
@@ -265,7 +266,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     zIndex: 3,
-    shadowColor: "#000",
+    shadowColor: '#000',
     shadowOffset: {
       width: 0,
       height: 2,

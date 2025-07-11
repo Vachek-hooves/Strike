@@ -93,7 +93,7 @@ const StackCreateCollectionScreen = ({navigation}) => {
           placeholder="Description"
           value={description}
           onChangeText={setDescription}
-          placeholderTextColor="#666"
+          placeholderTextColor="#FFF"
           multiline={true}
           numberOfLines={3}
           textAlignVertical='top'
@@ -125,7 +125,7 @@ const StackCreateCollectionScreen = ({navigation}) => {
             placeholder="Enter custom category"
             value={customCategory}
             onChangeText={setCustomCategory}
-            placeholderTextColor="#666"
+            placeholderTextColor="#FFF"
           />
         )}
         
@@ -159,14 +159,14 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   input: {
-    backgroundColor: '#1C1C1E',
+    backgroundColor: '#2F4F4F',
     padding: 15,
     borderRadius: 8,
     color: '#FFFFFF',
     marginBottom: 12,
   },
   dropdownHeader: {
-    backgroundColor: '#1C1C1E',
+    backgroundColor: '#2F4F4F',
     padding: 15,
     borderRadius: 8,
     marginBottom: 2,
@@ -175,7 +175,7 @@ const styles = StyleSheet.create({
     color: '#FFFFFF',
   },
   createButton: {
-    backgroundColor: '#0A84FF',
+    backgroundColor: '#D4AF37',
     padding: 16,
     borderRadius: 8,
     marginTop: 20,

@@ -156,7 +156,7 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
   addButton: {
-    backgroundColor: '#0A84FF',
+    backgroundColor: '#D4AF37',
     padding: 16,
     borderRadius: 8,
     alignItems: 'center',
@@ -168,7 +168,7 @@ const styles = StyleSheet.create({
     fontWeight: '600',
   },
   deleteButton: {
-    backgroundColor: '#FF453A',
+    backgroundColor: '#2F4F4F',
     padding: 16,
     borderRadius: 8,
     alignItems: 'center',

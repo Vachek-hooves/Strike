@@ -1,8 +1,15 @@
-import { StyleSheet, Text, View, ScrollView, TouchableOpacity ,Image} from 'react-native'
-import TabLayou from '../../components/layout/TabLayou'
-import { useContextApp } from '../../store/context'
-import Icon from 'react-native-vector-icons/FontAwesome5'
-import { ACHIEVEMENTS } from '../../data/achievements'
+import {
+  StyleSheet,
+  Text,
+  View,
+  ScrollView,
+  TouchableOpacity,
+  Image,
+} from 'react-native';
+import TabLayou from '../../components/layout/TabLayou';
+import {useContextApp} from '../../store/context';
+import Icon from 'react-native-vector-icons/FontAwesome5';
+import {ACHIEVEMENTS} from '../../data/achievements';
 
 // const ACHIEVEMENTS = [
 //   {
@@ -58,15 +65,14 @@ import { ACHIEVEMENTS } from '../../data/achievements'
 // ]
 
 const TabAchievScreen = () => {
-  const { achievements, scores } = useContextApp()
+  const {achievements, scores} = useContextApp();
 
   return (
     <TabLayou>
-      <ScrollView 
+      <ScrollView
         style={styles.scrollView}
         contentContainerStyle={styles.scrollContent}
-        showsVerticalScrollIndicator={false}
-      >
+        showsVerticalScrollIndicator={false}>
         {/* Header with total points */}
         <View style={styles.headerContainer}>
           <Text style={styles.title}>Achievements & progress</Text>
@@ -80,15 +86,14 @@ const TabAchievScreen = () => {
         </View>
 
         {/* Achievement list */}
-        {ACHIEVEMENTS.map((achievement) => (
-          <View 
-            key={achievement.id} 
+        {ACHIEVEMENTS.map(achievement => (
+          <View
+            key={achievement.id}
             style={[
               styles.achievementCard,
-              !achievements[achievement.id] && styles.achievementLocked
-            ]}
-          >
-              {/* <Image source={require('../../assets/ui/awardFrame.png')} style={styles.awardFrame}/> */}
+              !achievements[achievement.id] && styles.achievementLocked,
+            ]}>
+            {/* <Image source={require('../../assets/ui/awardFrame.png')} style={styles.awardFrame}/> */}
             <View style={styles.achievementIcon}>
               <Text style={styles.iconText}>{achievement.icon}</Text>
             </View>
@@ -98,23 +103,24 @@ const TabAchievScreen = () => {
                 {achievement.description}
               </Text>
               <View style={styles.progressBar}>
-                <View 
+                <View
                   style={[
                     styles.progressFill,
-                    { width: achievements[achievement.id] ? '100%' : '0%' }
-                  ]} 
+                    {width: achievements[achievement.id] ? '100%' : '0%'},
+                  ]}
                 />
               </View>
             </View>
             <Text style={styles.achievementPoints}>+{achievement.points}</Text>
           </View>
         ))}
+        <View style={{height: 120}} />
       </ScrollView>
     </TabLayou>
-  )
-}
+  );
+};
 
-export default TabAchievScreen
+export default TabAchievScreen;
 
 const styles = StyleSheet.create({
   scrollView: {
@@ -211,4 +217,4 @@ const styles = StyleSheet.create({
     backgroundColor: '#2196f3',
     borderRadius: 2,
   },
-})
+});

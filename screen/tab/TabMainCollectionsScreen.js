@@ -99,7 +99,7 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   createButton: {
-    backgroundColor: '#0A84FF',
+    backgroundColor: '#D4AF37',
     padding: 16,
     borderRadius: 8,
     width: '100%',
